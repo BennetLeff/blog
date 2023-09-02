@@ -17,15 +17,15 @@
     </header>
     <main>
       <section>
-        <div class="grid grid-cols-4 border-b-2 border-red-100">
-          <div class="p-4">
+        <div class="grid grid-cols-12 border-b-2 border-red-100">
+          <div class="p-4 col-span-3">
             <h1 class="text-4xl">Bennet Leff</h1>
             <h2 class="text-2xl">things I'm working on</h2>
             <h3 class="text-xl">bennetleff@gmail.com</h3>
           </div>
-          <div class="bg-red-200"></div>
-          <div class="bg-red-400"></div>
-          <div class="bg-red-600"></div>
+          <div class="bg-red-200 col-span-5"></div>
+          <div class="bg-red-400 col-span-3"></div>
+          <div class="bg-red-600 col-span-1"></div>
         </div>
       </section>
       <section class="grid grid-cols-12 my-8">
@@ -87,12 +87,12 @@
             visualization project I've been a part of.
           </p>
           <p class="text-xl my-2">
-            So what are these overly academic sounding things? They're based on
-            differentiable rendering. The idea is: The rendering process is a
-            function that takes some objects (usually placed by an artist) and
+            What do these papers have to do with anything? They're based on
+            differentiable rendering. Basically, the rendering process is a
+            function that takes some objects (commonly placed by an artist) and
             paints pixels on the screen. If we slightly update the rendering
             process, we can perform <b>calculus</b> on the rendering function.
-            That's handy because machine learning finds good solutions to most
+            That's handy because Machine Learning finds good solutions to most
             problems using calculus. Look at
             <a
               class="text-red-300"
@@ -101,6 +101,35 @@
             >
             for a visual explanation.
           </p>
+          <p class="text-xl my-2">
+            To motivate the extra machine learning baggage, consider the problem
+            of inverse graphics. Suppose we have photos of an object or a scene
+            or whatever, and we want to reconstruct the subject in the computer.
+            We can train a model - sometimes a neural network - to "fit" the
+            scene.
+          </p>
+          <p class="text-xl my-2">
+            Imagine some knobs that control how much red, green, and blue flow
+            into a pixel. In the first network pictured below all knobs are set
+            to 0, so the output pixel is black. In the next network, we've
+            fiddled with the knobs such that the amount of red, green, and blue
+            flowing out set the pixel to a purple hue. If we assign knobs to
+            every pixel on your screen, you can control the image your computer
+            creates. Along with a large bag of tricks, we can fiddle knobs until
+            a large set of pixels looks like an image we want to create.
+          </p>
+          <div class="flex">
+            <img
+              alt="untrained"
+              class="w-1/2"
+              src="https://s3.us-east-2.amazonaws.com/blog.bennet.me/untrained_1.svg"
+            />
+            <img
+              alt="some training"
+              class="w-1/2"
+              src="https://s3.us-east-2.amazonaws.com/blog.bennet.me/untrained_2.svg"
+            />
+          </div>
         </div>
         <div class="col-span-2"></div>
       </section>
