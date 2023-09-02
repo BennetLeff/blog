@@ -1,0 +1,109 @@
+<html>
+  <style>
+    body {
+      font-family: "Schibsted Grotesk";
+    }
+  </style>
+  <body class="bg-[#2f2f2f] text-red-100">
+    <header>
+      <title>bennet leff</title>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <script src="https://cdn.tailwindcss.com"></script>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Schibsted+Grotesk"
+      />
+    </header>
+    <main>
+      <section>
+        <div class="grid grid-cols-4 border-b-2 border-red-100">
+          <div class="p-4">
+            <h1 class="text-4xl">Bennet Leff</h1>
+            <h2 class="text-2xl">things I'm working on</h2>
+            <h3 class="text-xl">bennetleff@gmail.com</h3>
+          </div>
+          <div class="bg-red-200"></div>
+          <div class="bg-red-400"></div>
+          <div class="bg-red-600"></div>
+        </div>
+      </section>
+      <section class="grid grid-cols-12 my-8">
+        <div class="col-span-2"></div>
+        <div class="col-span-8">
+          <p class="text-4xl mb-8">Blog Init</p>
+          <p class="text-xl my-2">
+            I've crossed the one year mark writing software as a contractor.
+            Before that I worked for a design firm, a bank, and a startup. I
+            learned more in one year than in the past years combined. I did this
+            all in Mexico so I now fluently speak Spanish and got the chance to
+            cook professionally in my free-time. If you're looking for someone
+            to implement state-of-the-art ML papers or teach you regional
+            Mexican cuisine, I'm your guy. I've spent a few years developing
+            full-stack in React + Node incase that's what you need.
+          </p>
+          <p class="text-xl my-2">Here's some food I cooked</p>
+          <div class="grid grid-cols-4 gap-4 my-4">
+            <div>
+              <img
+                class="rounded-xl"
+                src="https://s3.us-east-2.amazonaws.com/blog.bennet.me/IMG_8272.jpg"
+              />
+              <p>heirloom veggies</p>
+            </div>
+            <div>
+              <img
+                class="rounded-xl"
+                src="https://s3.us-east-2.amazonaws.com/blog.bennet.me/IMG_8704.jpg"
+              />
+              <p>mole verde, pistachio, zaatar</p>
+            </div>
+            <div>
+              <img
+                class="rounded-xl"
+                src="https://s3.us-east-2.amazonaws.com/blog.bennet.me/IMG_8815.jpg"
+              />
+              <p>
+                sousvide pork jowl, mole casero, heirloom carrots, chicharrón
+              </p>
+            </div>
+            <div>
+              <img
+                class="rounded-xl"
+                src="https://s3.us-east-2.amazonaws.com/blog.bennet.me/IMG_8745.jpg"
+              />
+              <p>guanciale, rosemary, salsa matcha</p>
+            </div>
+          </div>
+          <p class="text-xl my-2">I'm a better cook than photographer.</p>
+          <p class="text-xl my-2">
+            Anyways, professionally I'm currently working on a Rust based
+            rendering engine to bring a few Computer Vision papers to market as
+            an actual product. Before I uprooted myself to another country, I
+            was pursuing a masters degree in AI and I've kept up with the
+            literature since then. After I saw the incredible "3D Gaussian
+            Splatting for Real-Time Radiance Field Rendering" and "Zip-NeRF"
+            papers, I felt the literature was mature enough to utilize in a 3D
+            visualization project I've been a part of.
+          </p>
+          <p class="text-xl my-2">
+            So what are these overly academic sounding things? They're based on
+            differentiable rendering. The idea is: The rendering process is a
+            function that takes some objects (usually placed by an artist) and
+            paints pixels on the screen. If we slightly update the rendering
+            process, we can perform <b>calculus</b> on the rendering function.
+            That's handy because machine learning finds good solutions to most
+            problems using calculus. Look at
+            <a
+              class="text-red-300"
+              href="https://youtu.be/tGJ4tEwhgo8?si=ci9RC1C9m1qjcRo0"
+              >this video</a
+            >
+            for a visual explanation.
+          </p>
+        </div>
+        <div class="col-span-2"></div>
+      </section>
+    </main>
+  </body>
+</html>
