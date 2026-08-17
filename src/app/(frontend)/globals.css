@@ -1,9 +1,12 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-ogg), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-body: var(--font-ogg), serif;
-  --font-ogg: var(--font-ogg), serif;
+  --font-sans: var(--font-post-grotesk), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: var(--font-post-grotesk), sans-serif;
+  --font-post-grotesk: var(--font-post-grotesk), sans-serif;
+  --font-subtitle: var(--font-ogg), Georgia, serif;
+  --font-serif: var(--font-ogg), Georgia, serif;
+  --font-ogg: var(--font-ogg), Georgia, serif;
   --font-heading: var(--font-ot-sector-narrow), sans-serif;
   --font-sector-narrow: var(--font-ot-sector-narrow), sans-serif;
   --font-sector-grid: var(--font-ot-sector-narrow-grid), sans-serif;
@@ -21,13 +24,26 @@
 body {
   background-color: rgb(236, 231, 218);
   color: #1c1a17;
-  font-family: var(--font-ogg), serif;
+  font-family: var(--font-post-grotesk), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 h1,
 h2,
 h3 {
   font-family: var(--font-heading);
+}
+
+.font-subtitle,
+.font-serif,
+.font-ogg {
+  font-family: var(--font-ogg), Georgia, serif;
+}
+
+.payload-richtext {
+  font-family: var(--font-post-grotesk), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 1.1875rem;
+  line-height: 1.75;
+  letter-spacing: -0.01em;
 }
 
 .payload-richtext a {
@@ -43,11 +59,20 @@ h3 {
 }
 
 .payload-richtext p {
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.35rem;
 }
 
 .payload-richtext p:last-child {
   margin-bottom: 0;
+}
+
+.payload-richtext blockquote {
+  font-family: var(--font-ogg), Georgia, serif;
+  font-style: italic;
+  border-left: 2px solid #d84715;
+  padding-left: 1.25rem;
+  margin: 2rem 0;
+  color: #48433a;
 }
 
 .custom-scrollbar {

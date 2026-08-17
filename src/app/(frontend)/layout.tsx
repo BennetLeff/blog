@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ogg, otSectorNarrow, otSectorNarrowGrid } from "./fonts";
+import { postGrotesk, ogg, otSectorNarrow, otSectorNarrowGrid } from "./fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -15,7 +15,7 @@ export default function FrontendLayout({
   return (
     <html
       lang="en"
-      className={`${ogg.variable} ${otSectorNarrow.variable} ${otSectorNarrowGrid.variable} h-full antialiased`}
+      className={`${postGrotesk.variable} ${ogg.variable} ${otSectorNarrow.variable} ${otSectorNarrowGrid.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">{children}</body>
     </html>
