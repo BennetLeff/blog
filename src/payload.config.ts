@@ -13,8 +13,6 @@ import { Posts } from './collections/Posts'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
-const isProduction = process.env.NODE_ENV === 'production'
-
 const cloudflare = await getCloudflareContext()
 
 export default buildConfig({
@@ -46,13 +44,18 @@ export default buildConfig({
 })
 
 async function getCloudflareContext(): Promise<any> {
+  if ((globalThis as any).__cf_proxy) {
+    return (globalThis as any).__cf_proxy
+  }
   try {
     const wranglerPkg = `${'__wrangler'.replaceAll('_', '')}`
     const { getPlatformProxy } = await import(/* webpackIgnore: true */ wranglerPkg)
-    return await getPlatformProxy({
+    const proxy = await getPlatformProxy({
       environment: process.env.CLOUDFLARE_ENV,
       remoteBindings: true,
     })
+    ;(globalThis as any).__cf_proxy = proxy
+    return proxy
   } catch (err) {
     console.debug('Failed to get cloudflare proxy context:', err)
     return { env: {} }
