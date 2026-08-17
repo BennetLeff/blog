@@ -34,6 +34,23 @@ const nextConfig = {
         ],
       },
       {
+        source: '/((?!admin|api).*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, s-maxage=60, stale-while-revalidate=86400',
+          },
+          {
+            key: 'Cloudflare-CDN-Cache-Control',
+            value: 'max-age=3600, stale-while-revalidate=86400',
+          },
+          {
+            key: 'CDN-Cache-Control',
+            value: 'max-age=3600, stale-while-revalidate=86400',
+          },
+        ],
+      },
+      {
         source: '/:path*',
         headers: [
           {
@@ -51,10 +68,6 @@ const nextConfig = {
           {
             key: 'Permissions-Policy',
             value: 'camera=(), microphone=(), geolocation=()',
-          },
-          {
-            key: 'Cloudflare-CDN-Cache-Control',
-            value: 'max-age=3600, stale-while-revalidate=86400',
           },
         ],
       },

@@ -520,8 +520,7 @@ async function fetchFromD1Http(slug?: string): Promise<Post[]> {
         Authorization: `Bearer ${apiToken}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ sql: sqlQuery }),
-      cache: 'no-store',
+      next: { revalidate: 60 },
     })
 
     if (res.ok) {
