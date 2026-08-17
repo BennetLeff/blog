@@ -8,8 +8,8 @@ export default async function Home() {
   const posts = await getPosts();
 
   return (
-    <main className="min-h-screen max-w-6xl mx-auto px-6 sm:px-12 py-16 sm:py-24 flex flex-col justify-between">
-      <header className="mb-14 sm:mb-20">
+    <main className="min-h-screen max-w-6xl mx-auto px-6 sm:px-12 py-16 sm:py-20 flex flex-col justify-start">
+      <header className="mb-8 sm:mb-12">
         <h1 className="text-7xl sm:text-8xl md:text-9xl lg:text-[11rem] font-normal tracking-tight leading-[0.9] text-[#d84715]">
           Bennet Leff
         </h1>
