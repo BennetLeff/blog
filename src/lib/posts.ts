@@ -5,6 +5,7 @@ export interface Post {
   slug: string;
   title: string;
   date: string;
+  publishedAt?: string;
   category: string;
   readingTime: string;
   excerpt: string;
@@ -13,192 +14,10 @@ export interface Post {
 
 export const defaultRealPosts: Post[] = [
   {
-    slug: "temper",
-    title: "Temper",
-    date: "July 2026",
-    category: "Tinkering",
-    readingTime: "idk how long this will take you to read",
-    excerpt: "Building verification tooling so agents can design an induction cooker in the box.",
-    content: {
-      root: {
-        children: [
-          {
-            children: [
-              {
-                detail: 0,
-                format: 0,
-                mode: "normal",
-                style: "",
-                text: "I love to cook. I've even done popups where I got paid to cook my own ideas. I also love to build and tinker. I already have far too many kitchen devices but still don't have a ",
-                type: "text",
-                version: 1,
-              },
-              {
-                children: [
-                  {
-                    detail: 0,
-                    format: 0,
-                    mode: "normal",
-                    style: "",
-                    text: "Breville Control Freak",
-                    type: "text",
-                    version: 1,
-                  },
-                ],
-                direction: null,
-                format: "",
-                indent: 0,
-                type: "link",
-                version: 3,
-                fields: {
-                  linkType: "custom",
-                  newTab: false,
-                  url: "https://www.breville.com/en-us/product/bmc800",
-                },
-                id: "6a838aad035cf6094bbef334",
-              },
-              {
-                detail: 0,
-                format: 0,
-                mode: "normal",
-                style: "",
-                text: ". It's $1500. How hard could it be to gut a cheap induction cooker and add temperature sensing and control? Obviously, it's actually pretty hard. ",
-                type: "text",
-                version: 1,
-              },
-            ],
-            direction: null,
-            format: "",
-            indent: 0,
-            type: "paragraph",
-            version: 1,
-            textFormat: 0,
-            textStyle: "",
-          },
-          {
-            children: [
-              {
-                detail: 0,
-                format: 0,
-                mode: "normal",
-                style: "",
-                text: "Why would you even want one of these. There's a large range of chemical reactions that occur as you sweep temperature up and down from at least 80f to 450f. Chocolate tempers around 90f. You might gently poach fish at 122f. You could cook at a steak at 135f and then sear it much higher. At 140f starches begin to gelatinize. At 155f fat begins to render. Around 175f alcohol burns off. You might start to (very) slowly caramelize sugars and white chocolate around 200f for the best white chocolate and miso ganache imaginable. Around these temperatures the Maillard reaction occurs more and more rapidly with each extra Joule put in (although can occur much lower if patient - ask me about my black garlic and plantains). Precise temperature control over long periods of time is tantamount to achieving any of these reactions in a controlled manner. ",
-                type: "text",
-                version: 1,
-              },
-            ],
-            direction: null,
-            format: "",
-            indent: 0,
-            type: "paragraph",
-            version: 1,
-            textFormat: 0,
-            textStyle: "",
-          },
-          {
-            children: [
-              {
-                detail: 0,
-                format: 0,
-                mode: "normal",
-                style: "",
-                text: "I'm okay at electronics projects. I've taken apart audio equipment and circuit bent some strange sound machines but I'm not that good. Instead of learning to be a power electronics engineer from scratch I'm approaching this from a different angle. I'm a much better software engineer so I'd like to lean in to that and see how far we can push this project purely by building \"in the box.\" If we can simulate each piece and add verifiable testing, ",
-                type: "text",
-                version: 1,
-              },
-              {
-                detail: 0,
-                format: 2,
-                mode: "normal",
-                style: "",
-                text: "in theory",
-                type: "text",
-                version: 1,
-              },
-              {
-                detail: 0,
-                format: 0,
-                mode: "normal",
-                style: "",
-                text: ", LLM based agents can actually build this for us. Instead of building a the project directly, I'll build a suite of validation tooling so agents can build it and we'll even walk away with tooling for the next project. ",
-                type: "text",
-                version: 1,
-              },
-            ],
-            direction: null,
-            format: "",
-            indent: 0,
-            type: "paragraph",
-            version: 1,
-            textFormat: 0,
-            textStyle: "",
-          },
-          {
-            children: [
-              {
-                detail: 0,
-                format: 0,
-                mode: "normal",
-                style: "",
-                text: "In PCB design there's a stage called ",
-                type: "text",
-                version: 1,
-              },
-              {
-                children: [
-                  {
-                    detail: 0,
-                    format: 0,
-                    mode: "normal",
-                    style: "",
-                    text: "DRC",
-                    type: "text",
-                    version: 1,
-                  },
-                ],
-                direction: null,
-                format: "",
-                indent: 0,
-                type: "link",
-                version: 3,
-                fields: {
-                  linkType: "custom",
-                  newTab: false,
-                  url: "https://en.wikipedia.org/wiki/Design_rule_checking",
-                },
-                id: "6a838ea1035cf6094bbef337",
-              },
-              {
-                detail: 0,
-                format: 0,
-                mode: "normal",
-                style: "",
-                text: " which is essentially the stage where a design engineer would apply generic validations against the schematic, layout, and routing they've produced. The beauty of building DRC with agents is that we can 10x or 100x  the amount of validations that are standard in open source software and target them to just our specific schematic to be far more confident about the validity of our board. This way we can simulate much more of the process \"in the box\" where it's cheap (and drivable by agents). The board we're building is for an induction cooker, so we can go as far as running field solvers for inductance against the layout of components on our board and validate that things are approximately correct before we print a single PCB. ",
-                type: "text",
-                version: 1,
-              },
-            ],
-            direction: null,
-            format: "",
-            indent: 0,
-            type: "paragraph",
-            version: 1,
-            textFormat: 0,
-            textStyle: "",
-          },
-        ],
-        direction: null,
-        format: "",
-        indent: 0,
-        type: "root",
-        version: 1,
-      },
-    },
-  },
-  {
     slug: "hurdy-gurdy-simulator",
     title: "A Hurdy Gurdy Simulator in Rust",
     date: "Aug 2026",
+    publishedAt: "2026-08-17T21:48:15.945Z",
     category: "Tinkering",
     readingTime: "idk how long this will take you to read",
     excerpt: "A hurdy gurdy simulator in rust",
@@ -472,6 +291,190 @@ export const defaultRealPosts: Post[] = [
       },
     },
   },
+  {
+    slug: "temper",
+    title: "Temper",
+    date: "July 2026",
+    publishedAt: "2026-08-17T22:42:04.135Z",
+    category: "Tinkering",
+    readingTime: "idk how long this will take you to read",
+    excerpt: "Building verification tooling so agents can design an induction cooker in the box.",
+    content: {
+      root: {
+        children: [
+          {
+            children: [
+              {
+                detail: 0,
+                format: 0,
+                mode: "normal",
+                style: "",
+                text: "I love to cook. I've even done popups where I got paid to cook my own ideas. I also love to build and tinker. I already have far too many kitchen devices but still don't have a ",
+                type: "text",
+                version: 1,
+              },
+              {
+                children: [
+                  {
+                    detail: 0,
+                    format: 0,
+                    mode: "normal",
+                    style: "",
+                    text: "Breville Control Freak",
+                    type: "text",
+                    version: 1,
+                  },
+                ],
+                direction: null,
+                format: "",
+                indent: 0,
+                type: "link",
+                version: 3,
+                fields: {
+                  linkType: "custom",
+                  newTab: false,
+                  url: "https://www.breville.com/en-us/product/bmc800",
+                },
+                id: "6a838aad035cf6094bbef334",
+              },
+              {
+                detail: 0,
+                format: 0,
+                mode: "normal",
+                style: "",
+                text: ". It's $1500. How hard could it be to gut a cheap induction cooker and add temperature sensing and control? Obviously, it's actually pretty hard. ",
+                type: "text",
+                version: 1,
+              },
+            ],
+            direction: null,
+            format: "",
+            indent: 0,
+            type: "paragraph",
+            version: 1,
+            textFormat: 0,
+            textStyle: "",
+          },
+          {
+            children: [
+              {
+                detail: 0,
+                format: 0,
+                mode: "normal",
+                style: "",
+                text: "Why would you even want one of these. There's a large range of chemical reactions that occur as you sweep temperature up and down from at least 80f to 450f. Chocolate tempers around 90f. You might gently poach fish at 122f. You could cook at a steak at 135f and then sear it much higher. At 140f starches begin to gelatinize. At 155f fat begins to render. Around 175f alcohol burns off. You might start to (very) slowly caramelize sugars and white chocolate around 200f for the best white chocolate and miso ganache imaginable. Around these temperatures the Maillard reaction occurs more and more rapidly with each extra Joule put in (although can occur much lower if patient - ask me about my black garlic and plantains). Precise temperature control over long periods of time is tantamount to achieving any of these reactions in a controlled manner. ",
+                type: "text",
+                version: 1,
+              },
+            ],
+            direction: null,
+            format: "",
+            indent: 0,
+            type: "paragraph",
+            version: 1,
+            textFormat: 0,
+            textStyle: "",
+          },
+          {
+            children: [
+              {
+                detail: 0,
+                format: 0,
+                mode: "normal",
+                style: "",
+                text: "I'm okay at electronics projects. I've taken apart audio equipment and circuit bent some strange sound machines but I'm not that good. Instead of learning to be a power electronics engineer from scratch I'm approaching this from a different angle. I'm a much better software engineer so I'd like to lean in to that and see how far we can push this project purely by building \"in the box.\" If we can simulate each piece and add verifiable testing, ",
+                type: "text",
+                version: 1,
+              },
+              {
+                detail: 0,
+                format: 2,
+                mode: "normal",
+                style: "",
+                text: "in theory",
+                type: "text",
+                version: 1,
+              },
+              {
+                detail: 0,
+                format: 0,
+                mode: "normal",
+                style: "",
+                text: ", LLM based agents can actually build this for us. Instead of building a the project directly, I'll build a suite of validation tooling so agents can build it and we'll even walk away with tooling for the next project. ",
+                type: "text",
+                version: 1,
+              },
+            ],
+            direction: null,
+            format: "",
+            indent: 0,
+            type: "paragraph",
+            version: 1,
+            textFormat: 0,
+            textStyle: "",
+          },
+          {
+            children: [
+              {
+                detail: 0,
+                format: 0,
+                mode: "normal",
+                style: "",
+                text: "In PCB design there's a stage called ",
+                type: "text",
+                version: 1,
+              },
+              {
+                children: [
+                  {
+                    detail: 0,
+                    format: 0,
+                    mode: "normal",
+                    style: "",
+                    text: "DRC",
+                    type: "text",
+                    version: 1,
+                  },
+                ],
+                direction: null,
+                format: "",
+                indent: 0,
+                type: "link",
+                version: 3,
+                fields: {
+                  linkType: "custom",
+                  newTab: false,
+                  url: "https://en.wikipedia.org/wiki/Design_rule_checking",
+                },
+                id: "6a838ea1035cf6094bbef337",
+              },
+              {
+                detail: 0,
+                format: 0,
+                mode: "normal",
+                style: "",
+                text: " which is essentially the stage where a design engineer would apply generic validations against the schematic, layout, and routing they've produced. The beauty of building DRC with agents is that we can 10x or 100x  the amount of validations that are standard in open source software and target them to just our specific schematic to be far more confident about the validity of our board. This way we can simulate much more of the process \"in the box\" where it's cheap (and drivable by agents). The board we're building is for an induction cooker, so we can go as far as running field solvers for inductance against the layout of components on our board and validate that things are approximately correct before we print a single PCB. ",
+                type: "text",
+                version: 1,
+              },
+            ],
+            direction: null,
+            format: "",
+            indent: 0,
+            type: "paragraph",
+            version: 1,
+            textFormat: 0,
+            textStyle: "",
+          },
+        ],
+        direction: null,
+        format: "",
+        indent: 0,
+        type: "root",
+        version: 1,
+      },
+    },
+  },
 ];
 
 function formatPostDoc(doc: any): Post {
@@ -484,10 +487,14 @@ function formatPostDoc(doc: any): Post {
     }
   }
 
+  const rawDate = doc.publishedAt || doc.published_at || doc.createdAt || doc.created_at
+  const formattedDate = doc.date || (rawDate ? new Date(rawDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : 'Recent')
+
   return {
     slug: doc.slug,
     title: doc.title,
-    date: doc.date || (doc.createdAt || doc.created_at ? new Date(doc.createdAt || doc.created_at).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : 'Recent'),
+    date: formattedDate,
+    publishedAt: rawDate,
     category: doc.category || 'Writing',
     readingTime: doc.readingTime || doc.reading_time || '5 min read',
     excerpt: doc.excerpt || '',
@@ -505,7 +512,7 @@ async function fetchFromD1Http(slug?: string): Promise<Post[]> {
   try {
     const sqlQuery = slug
       ? `SELECT * FROM posts WHERE slug = '${slug.replace(/'/g, "''")}' AND status = 'published' LIMIT 1`
-      : "SELECT * FROM posts WHERE status = 'published' ORDER BY id DESC"
+      : "SELECT * FROM posts WHERE status = 'published' ORDER BY COALESCE(published_at, created_at) DESC, id DESC"
 
     const res = await fetch(`https://api.cloudflare.com/client/v4/accounts/${accountId}/d1/database/${databaseId}/query`, {
       method: 'POST',
@@ -546,6 +553,7 @@ export async function getPosts(): Promise<Post[]> {
           equals: 'published',
         },
       },
+      sort: '-publishedAt',
       limit: 100,
     })
 
