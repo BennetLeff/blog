@@ -4,8 +4,7 @@ import { getPosts, getPostBySlug } from "@/lib/posts";
 import { RichText } from "@payloadcms/richtext-lexical/react";
 import type { Metadata } from "next";
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+export const revalidate = 60;
 
 interface PageProps {
   params: Promise<{ slug: string }>;
