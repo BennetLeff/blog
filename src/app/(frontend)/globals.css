@@ -10,20 +10,17 @@
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: rgb(236, 231, 218);
+  --foreground: #1c1a17;
+  --title-orange: #d84715;
+  --muted: #524d44;
+  --subtle: #6e675c;
+  --border: #d4cdc0;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background-color: rgb(236, 231, 218);
+  color: #1c1a17;
   font-family: var(--font-ogg), serif;
 }
 
@@ -34,15 +31,15 @@ h3 {
 }
 
 .payload-richtext a {
+  color: #1c1a17;
   text-decoration: underline;
   text-underline-offset: 3px;
-  text-decoration-color: rgba(150, 150, 150, 0.4);
-  transition: text-decoration-color 0.2s, opacity 0.2s;
+  text-decoration-color: #d84715;
+  transition: color 0.2s, text-decoration-color 0.2s;
 }
 
 .payload-richtext a:hover {
-  text-decoration-color: currentColor;
-  opacity: 0.8;
+  color: #d84715;
 }
 
 .payload-richtext p {
@@ -55,7 +52,7 @@ h3 {
 
 .custom-scrollbar {
   scrollbar-width: thin;
-  scrollbar-color: rgba(120, 120, 120, 0.3) transparent;
+  scrollbar-color: rgba(90, 85, 75, 0.4) transparent;
 }
 
 .custom-scrollbar::-webkit-scrollbar {
@@ -67,6 +64,6 @@ h3 {
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: rgba(120, 120, 120, 0.3);
+  background-color: rgba(90, 85, 75, 0.4);
   border-radius: 9999px;
 }

@@ -42,33 +42,33 @@ export default async function PostPage({ params }: PageProps) {
       <nav className="mb-12">
         <Link
           href="/"
-          className="inline-flex items-center text-sm font-mono text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100 transition-colors"
+          className="inline-flex items-center text-sm font-mono text-[#575249] hover:text-[#d84715] transition-colors"
         >
           ← Bennet Leff
         </Link>
       </nav>
 
       {/* Header */}
-      <header className="mb-12 border-b border-neutral-200/80 dark:border-neutral-800/80 pb-8">
-        <div className="flex items-center gap-3 text-xs uppercase tracking-widest font-mono text-neutral-400 dark:text-neutral-500 mb-4">
+      <header className="mb-12 border-b border-[#d4cdc0] pb-8">
+        <div className="flex items-center gap-3 text-xs uppercase tracking-widest font-mono text-[#575249] mb-4">
           <span>{post.category}</span>
           <span>•</span>
           <span>{post.date}</span>
           <span>•</span>
           <span>{post.readingTime}</span>
         </div>
-        <h1 className="text-3xl sm:text-5xl md:text-6xl font-normal tracking-tight text-neutral-900 dark:text-neutral-100 leading-tight">
+        <h1 className="text-3xl sm:text-5xl md:text-6xl font-normal tracking-tight text-[#1c1a17] leading-tight">
           {post.title}
         </h1>
         {post.excerpt && (
-          <p className="mt-6 text-lg sm:text-xl text-neutral-600 dark:text-neutral-400 italic leading-relaxed">
+          <p className="mt-6 text-lg sm:text-xl text-[#48433a] italic leading-relaxed font-serif">
             {post.excerpt}
           </p>
         )}
       </header>
 
       {/* Content */}
-      <div className="space-y-6 text-lg sm:text-xl leading-relaxed text-neutral-800 dark:text-neutral-200">
+      <div className="space-y-6 text-lg sm:text-xl leading-relaxed text-[#1c1a17] payload-richtext">
         {isLexical ? (
           <RichText data={post.content} />
         ) : Array.isArray(post.content) ? (
@@ -81,8 +81,8 @@ export default async function PostPage({ params }: PageProps) {
       </div>
 
       {/* Footer Navigation */}
-      <footer className="mt-20 pt-8 border-t border-neutral-200/80 dark:border-neutral-800/80 flex justify-between items-center text-sm font-mono text-neutral-500 dark:text-neutral-400">
-        <Link href="/" className="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">
+      <footer className="mt-20 pt-8 border-t border-[#d4cdc0] flex justify-between items-center text-sm font-mono text-[#575249]">
+        <Link href="/" className="hover:text-[#d84715] transition-colors">
           ← Back to writing
         </Link>
         <span>{post.date}</span>
