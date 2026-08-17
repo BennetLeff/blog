@@ -51,7 +51,7 @@ async function getCloudflareContext(): Promise<any> {
     const { getPlatformProxy } = await import(/* webpackIgnore: true */ wranglerPkg)
     return await getPlatformProxy({
       environment: process.env.CLOUDFLARE_ENV,
-      remoteBindings: isProduction || Boolean(process.env.CLOUDFLARE_D1_REMOTE),
+      remoteBindings: true,
     })
   } catch (err) {
     console.debug('Failed to get cloudflare proxy context:', err)
