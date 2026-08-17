@@ -2,10 +2,10 @@ import type { CollectionConfig } from 'payload'
 
 export const Posts: CollectionConfig = {
   slug: 'posts',
+  defaultSort: '-publishedAt',
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'category', 'publishedAt', 'status'],
-    defaultSort: '-publishedAt',
   },
   access: {
     read: () => true,
