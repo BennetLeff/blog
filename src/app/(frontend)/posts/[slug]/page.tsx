@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getPosts, getPostBySlug } from "@/lib/posts";
-import { RichText } from "@payloadcms/richtext-lexical/react";
+import { RichText, defaultJSXConverters } from "@payloadcms/richtext-lexical/react";
+import { CodeRenderer } from "@/components/CodeRenderer";
 import type { Metadata } from "next";
 
 export const revalidate = 60;
@@ -50,6 +51,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     },
   };
 }
+
+const customJSXConverters = {
+  ...defaultJSXConverters,
+  blocks: {
+    Code: ({ node }: any) => {
+      const code = node.fields?.code || "";
+      const language = node.fields?.language || "text";
+      return <CodeRenderer code={code} language={language} />;
+    },
+  },
+};
 
 export default async function PostPage({ params }: PageProps) {
   const { slug } = await params;
@@ -134,7 +146,7 @@ export default async function PostPage({ params }: PageProps) {
         {/* Content */}
         <div className="space-y-6 text-lg sm:text-xl leading-relaxed text-[#1c1a17] payload-richtext">
           {isLexical ? (
-            <RichText data={post.content} />
+            <RichText data={post.content} converters={customJSXConverters as any} />
           ) : Array.isArray(post.content) ? (
             post.content.map((paragraph: string, idx: number) => (
               <p key={idx}>{paragraph}</p>

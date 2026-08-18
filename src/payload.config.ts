@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import { sqliteD1Adapter } from '@payloadcms/db-d1-sqlite'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { lexicalEditor, BlocksFeature, CodeBlock } from '@payloadcms/richtext-lexical'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import { r2Storage } from '@payloadcms/storage-r2'
@@ -23,7 +23,16 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Posts],
-  editor: lexicalEditor(),
+  editor: lexicalEditor({
+    features: ({ defaultFeatures }) => [
+      ...defaultFeatures,
+      BlocksFeature({
+        blocks: [
+          CodeBlock(),
+        ],
+      }),
+    ],
+  }),
   secret: process.env.PAYLOAD_SECRET || 'fallback-secret-for-development-32chars',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),

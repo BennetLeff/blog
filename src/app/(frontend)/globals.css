@@ -65,6 +65,16 @@ h3 {
   margin-bottom: 0;
 }
 
+.payload-richtext code:not(pre code) {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.88em;
+  background-color: #ded7c8;
+  border: 1px solid #d4cdc0;
+  padding: 0.15em 0.4em;
+  border-radius: 0.25rem;
+  color: #8f2b05;
+}
+
 .payload-richtext blockquote {
   font-family: var(--font-ogg), Georgia, serif;
   font-style: italic;
@@ -72,6 +82,64 @@ h3 {
   padding-left: 1.25rem;
   margin: 2rem 0;
   color: #48433a;
+}
+
+/* Syntax Highlighting (Prism tokens on warm cream) */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #787164;
+  font-style: italic;
+}
+
+.token.punctuation {
+  color: #575249;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: #ad3d00;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: #276938;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: #824f00;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: #c93d0c;
+  font-weight: 500;
+}
+
+.token.function,
+.token.class-name {
+  color: #1b5b99;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  color: #843265;
 }
 
 .custom-scrollbar {
