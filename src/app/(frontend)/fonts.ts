@@ -3,22 +3,22 @@ import localFont from "next/font/local";
 export const postGrotesk = localFont({
   src: [
     {
-      path: "../../../public/fonts/PostGrotesk-Book-Trial.otf",
+      path: "../../../public/fonts/PostGrotesk-Book-Trial.woff2",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../../../public/fonts/PostGrotesk-Italic-Trial.otf",
+      path: "../../../public/fonts/PostGrotesk-Italic-Trial.woff2",
       weight: "400",
       style: "italic",
     },
     {
-      path: "../../../public/fonts/PostGrotesk-Medium-Trial.otf",
+      path: "../../../public/fonts/PostGrotesk-Medium-Trial.woff2",
       weight: "500",
       style: "normal",
     },
     {
-      path: "../../../public/fonts/PostGrotesk-Bold-Trial.otf",
+      path: "../../../public/fonts/PostGrotesk-Bold-Trial.woff2",
       weight: "700",
       style: "normal",
     },
@@ -30,12 +30,12 @@ export const postGrotesk = localFont({
 export const ogg = localFont({
   src: [
     {
-      path: "../../../public/fonts/Ogg-Regular-Trial.otf",
+      path: "../../../public/fonts/Ogg-Regular-Trial.woff2",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../../../public/fonts/Ogg-Italic-Trial.otf",
+      path: "../../../public/fonts/Ogg-Italic-Trial.woff2",
       weight: "400",
       style: "italic",
     },
@@ -47,23 +47,11 @@ export const ogg = localFont({
 export const otSectorNarrow = localFont({
   src: [
     {
-      path: "../../../public/fonts/OTSectorNarrow-RegularFill.otf",
+      path: "../../../public/fonts/OTSectorNarrow-RegularFill.woff2",
       weight: "400",
       style: "normal",
     },
   ],
   variable: "--font-ot-sector-narrow",
-  display: "swap",
-});
-
-export const otSectorNarrowGrid = localFont({
-  src: [
-    {
-      path: "../../../public/fonts/OTSectorNarrow-RegularGrid.otf",
-      weight: "400",
-      style: "normal",
-    },
-  ],
-  variable: "--font-ot-sector-narrow-grid",
   display: "swap",
 });

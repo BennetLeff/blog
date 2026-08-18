@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { postGrotesk, ogg, otSectorNarrow, otSectorNarrowGrid } from "./fonts";
+import { postGrotesk, ogg, otSectorNarrow } from "./fonts";
 import "./globals.css";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://whoisben.net";
@@ -52,7 +52,7 @@ export default function FrontendLayout({
   return (
     <html
       lang="en"
-      className={`${postGrotesk.variable} ${ogg.variable} ${otSectorNarrow.variable} ${otSectorNarrowGrid.variable} h-full antialiased`}
+      className={`${postGrotesk.variable} ${ogg.variable} ${otSectorNarrow.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">
         <a

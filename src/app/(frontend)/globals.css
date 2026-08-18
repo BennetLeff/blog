@@ -9,7 +9,6 @@
   --font-ogg: var(--font-ogg), Georgia, serif;
   --font-heading: var(--font-ot-sector-narrow), sans-serif;
   --font-sector-narrow: var(--font-ot-sector-narrow), sans-serif;
-  --font-sector-grid: var(--font-ot-sector-narrow-grid), sans-serif;
 }
 
 :root {
