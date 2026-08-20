@@ -56,9 +56,15 @@ export async function POST(req: NextRequest) {
 
     const now = new Date().toISOString()
 
-    // 1. Try direct D1 HTTP API (fastest on Vercel)
+    function resolveDatabaseUuid(id?: string): string {
+      const defaultUuid = '59827847-99eb-48cb-8df2-af50185c82ca'
+      if (!id) return defaultUuid
+      const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+      return uuidRegex.test(id) ? id : defaultUuid
+    }
+
     const accountId = process.env.CLOUDFLARE_ACCOUNT_ID || '03f642afe070f05b727f7cd31f02ef48'
-    const databaseId = process.env.CLOUDFLARE_DATABASE_ID || '59827847-99eb-48cb-8df2-af50185c82ca'
+    const databaseId = resolveDatabaseUuid(process.env.CLOUDFLARE_DATABASE_ID || process.env.CLOUDFLARE_D1_REMOTE)
     const apiToken = process.env.CLOUDFLARE_API_TOKEN
 
     if (apiToken) {

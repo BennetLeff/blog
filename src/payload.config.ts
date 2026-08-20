@@ -54,6 +54,13 @@ export default buildConfig({
   ],
 })
 
+function resolveDatabaseUuid(id?: string): string {
+  const defaultUuid = '59827847-99eb-48cb-8df2-af50185c82ca'
+  if (!id) return defaultUuid
+  const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+  return uuidRegex.test(id) ? id : defaultUuid
+}
+
 async function getCloudflareContext(): Promise<any> {
   // 1. Production / Vercel with Cloudflare API Token (direct HTTP connection to D1)
   if (process.env.CLOUDFLARE_API_TOKEN || process.env.VERCEL || process.env.NODE_ENV === 'production') {
@@ -61,7 +68,7 @@ async function getCloudflareContext(): Promise<any> {
       const { createD1HttpClient } = await import('./lib/d1-http')
       const client = createD1HttpClient({
         accountId: process.env.CLOUDFLARE_ACCOUNT_ID || '03f642afe070f05b727f7cd31f02ef48',
-        databaseId: process.env.CLOUDFLARE_DATABASE_ID || process.env.CLOUDFLARE_D1_REMOTE || '59827847-99eb-48cb-8df2-af50185c82ca',
+        databaseId: resolveDatabaseUuid(process.env.CLOUDFLARE_DATABASE_ID || process.env.CLOUDFLARE_D1_REMOTE),
         apiToken: process.env.CLOUDFLARE_API_TOKEN || '',
       })
       return { env: { D1: client } }

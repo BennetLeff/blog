@@ -4,8 +4,17 @@ export interface D1HttpConfig {
   apiToken: string
 }
 
+function resolveValidDatabaseId(id?: string): string {
+  const defaultUuid = '59827847-99eb-48cb-8df2-af50185c82ca'
+  if (!id) return defaultUuid
+  const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+  return uuidRegex.test(id) ? id : defaultUuid
+}
+
 export function createD1HttpClient(config: D1HttpConfig) {
-  const { accountId, databaseId, apiToken } = config
+  const accountId = config.accountId || '03f642afe070f05b727f7cd31f02ef48'
+  const databaseId = resolveValidDatabaseId(config.databaseId)
+  const apiToken = config.apiToken
   const baseUrl = `https://api.cloudflare.com/client/v4/accounts/${accountId}/d1/database/${databaseId}`
 
   async function executeHttp(sql: string, params: any[] = []) {
@@ -91,11 +100,9 @@ export function createD1HttpClient(config: D1HttpConfig) {
       })
 
       if (!res.ok) {
-        // Fallback: execute /query and map by column keys
         const queryRes = await executeHttp(sql, params)
         const results = queryRes.results || []
         if (results.length === 0) return []
-        // Extract columns in sql order if possible
         return results.map((row: any) => Object.values(row))
       }
 
@@ -104,13 +111,11 @@ export function createD1HttpClient(config: D1HttpConfig) {
         return []
       }
 
-      // Cloudflare D1 /raw endpoint returns: data.result[0].results.rows: [[val1, val2, ...]]
       const rows = data.result?.[0]?.results?.rows
       if (Array.isArray(rows)) {
         return rows
       }
 
-      // If /raw returned results directly as array
       const directResults = data.result?.[0]?.results
       if (Array.isArray(directResults)) {
         return directResults
