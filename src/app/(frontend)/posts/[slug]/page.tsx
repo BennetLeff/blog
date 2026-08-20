@@ -132,7 +132,7 @@ export default async function PostPage({ params }: PageProps) {
             <span aria-hidden="true">•</span>
             <span>{post.readingTime}</span>
           </div>
-          <h1 className="text-3xl sm:text-5xl md:text-6xl font-normal tracking-tight text-[#1c1a17] leading-tight">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-normal tracking-tight text-[#1c1a17] leading-tight">
             {post.title}
           </h1>
           {post.excerpt && (

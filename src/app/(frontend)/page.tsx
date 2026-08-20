@@ -70,7 +70,7 @@ export default async function Home() {
                     className="group flex flex-col sm:flex-row sm:items-baseline justify-between py-6 sm:py-8 transition-all hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d84715] focus-visible:ring-offset-2 rounded-sm"
                   >
                     <div className="flex-1 pr-6">
-                      <h3 className="text-2xl sm:text-3xl md:text-4xl font-normal text-[#1c1a17] transition-transform group-hover:translate-x-1.5 duration-200 leading-snug">
+                      <h3 className="text-xl sm:text-2xl md:text-[1.65rem] font-normal text-[#1c1a17] transition-transform group-hover:translate-x-1 duration-200 leading-snug">
                         {post.title}
                       </h3>
                       {post.excerpt && (
