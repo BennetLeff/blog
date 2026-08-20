@@ -10,6 +10,9 @@ export const PageViews: CollectionConfig = {
   admin: {
     useAsTitle: 'path',
     defaultColumns: ['path', 'city', 'country', 'referrer', 'createdAt'],
+    components: {
+      beforeListTable: ['/components/admin/AnalyticsDashboard#AnalyticsDashboard'],
+    },
   },
   access: {
     read: ({ req: { user } }) => Boolean(user),
