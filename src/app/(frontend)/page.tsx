@@ -104,6 +104,39 @@ export default async function Home() {
             </ul>
           </div>
         </section>
+
+        {/* Minimal Footer with Resume and Links */}
+        <footer className="mt-16 pt-6 border-t border-[#d4cdc0] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-xs sm:text-sm font-mono text-[#575249]">
+          <div className="flex items-center gap-4">
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#1c1a17] hover:text-[#d84715] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d84715] rounded-sm"
+            >
+              Resume ↗
+            </a>
+            <span aria-hidden="true" className="text-[#8e877a]">•</span>
+            <a
+              href="https://github.com/BennetLeff"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#d84715] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d84715] rounded-sm"
+            >
+              GitHub ↗
+            </a>
+            <span aria-hidden="true" className="text-[#8e877a]">•</span>
+            <a
+              href="https://x.com/bennetleff"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#d84715] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d84715] rounded-sm"
+            >
+              X / Twitter ↗
+            </a>
+          </div>
+          <span className="text-[#8e877a]">© {new Date().getFullYear()} Bennet Leff</span>
+        </footer>
       </main>
     </>
   );
