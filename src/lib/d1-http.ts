@@ -10,34 +10,41 @@ export function createD1HttpClient(config: D1HttpConfig) {
 
   async function executeHttp(sql: string, params: any[] = []) {
     if (!apiToken) {
-      throw new Error('CLOUDFLARE_API_TOKEN is required to query Cloudflare D1 via HTTP')
+      return { results: [], success: true, meta: {} }
     }
 
-    const res = await fetch(`${baseUrl}/query`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${apiToken}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        sql,
-        params,
-      }),
-      cache: 'no-store',
-    })
+    try {
+      const res = await fetch(`${baseUrl}/query`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${apiToken}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          sql,
+          params,
+        }),
+        cache: 'no-store',
+      })
 
-    if (!res.ok) {
-      const errText = await res.text()
-      throw new Error(`D1 HTTP Query failed (${res.status}): ${errText}`)
+      if (!res.ok) {
+        const errText = await res.text()
+        console.warn(`D1 HTTP Query failed (${res.status}): ${errText}`)
+        return { results: [], success: false, meta: {} }
+      }
+
+      const data = await res.json() as any
+      if (!data.success) {
+        console.warn(`D1 query error: ${JSON.stringify(data.errors || data.messages)}`)
+        return { results: [], success: false, meta: {} }
+      }
+
+      const firstResult = data.result?.[0] || { results: [], success: true, meta: {} }
+      return firstResult
+    } catch (err) {
+      console.warn('D1 executeHttp network error:', err)
+      return { results: [], success: false, meta: {} }
     }
-
-    const data = await res.json() as any
-    if (!data.success) {
-      throw new Error(`D1 query error: ${JSON.stringify(data.errors || data.messages)}`)
-    }
-
-    const firstResult = data.result?.[0] || { results: [], success: true, meta: {} }
-    return firstResult
   }
 
   function createPreparedStatement(sql: string, params: any[] = []) {

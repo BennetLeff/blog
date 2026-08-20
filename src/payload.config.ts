@@ -40,6 +40,7 @@ export default buildConfig({
   },
   db: sqliteD1Adapter({
     binding: cloudflare?.env?.D1 as any,
+    push: false,
   }),
   plugins: [
     ...(cloudflare?.env?.R2
@@ -55,7 +56,7 @@ export default buildConfig({
 
 async function getCloudflareContext(): Promise<any> {
   // 1. Production / Vercel with Cloudflare API Token (direct HTTP connection to D1)
-  if (process.env.CLOUDFLARE_API_TOKEN || process.env.VERCEL) {
+  if (process.env.CLOUDFLARE_API_TOKEN || process.env.VERCEL || process.env.NODE_ENV === 'production') {
     try {
       const { createD1HttpClient } = await import('./lib/d1-http')
       const client = createD1HttpClient({
