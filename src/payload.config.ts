@@ -5,6 +5,7 @@ import { lexicalEditor, BlocksFeature, CodeBlock } from '@payloadcms/richtext-le
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import { r2Storage } from '@payloadcms/storage-r2'
+import { s3Storage } from '@payloadcms/storage-s3'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
@@ -48,6 +49,23 @@ export default buildConfig({
           r2Storage({
             bucket: cloudflare.env.R2 as any,
             collections: { media: true },
+          }),
+        ]
+      : (process.env.R2_ACCESS_KEY_ID || process.env.CLOUDFLARE_R2_ACCESS_KEY_ID || process.env.VERCEL)
+      ? [
+          s3Storage({
+            collections: {
+              media: true,
+            },
+            bucket: process.env.R2_BUCKET || 'blog-media',
+            config: {
+              credentials: {
+                accessKeyId: process.env.R2_ACCESS_KEY_ID || process.env.CLOUDFLARE_R2_ACCESS_KEY_ID || '',
+                secretAccessKey: process.env.R2_SECRET_ACCESS_KEY || process.env.CLOUDFLARE_R2_SECRET_ACCESS_KEY || '',
+              },
+              region: 'auto',
+              endpoint: `https://${process.env.CLOUDFLARE_ACCOUNT_ID || '03f642afe070f05b727f7cd31f02ef48'}.r2.cloudflarestorage.com`,
+            },
           }),
         ]
       : []),

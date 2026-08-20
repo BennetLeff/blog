@@ -13,8 +13,8 @@ export const Media: CollectionConfig = {
     },
   ],
   upload: {
-    // Disabled on Workers due to lack of sharp binary
     crop: false,
     focalPoint: false,
+    disableLocalStorage: true,
   },
 }
