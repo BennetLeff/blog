@@ -30,7 +30,6 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Bennet Leff",
     description: "Personal website, engineering essays, and writings of Bennet Leff.",
-    creator: "@bennetleff",
   },
   robots: {
     index: true,

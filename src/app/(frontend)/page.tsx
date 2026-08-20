@@ -29,7 +29,6 @@ export default async function Home() {
         jobTitle: "Software Engineer & Builder",
         sameAs: [
           "https://github.com/BennetLeff",
-          "https://x.com/bennetleff",
         ],
       },
     ],
@@ -105,7 +104,7 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* Minimal Footer with Resume and Links */}
+        {/* Minimal Footer with Resume and GitHub */}
         <footer className="mt-16 pt-6 border-t border-[#d4cdc0] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-xs sm:text-sm font-mono text-[#575249]">
           <div className="flex items-center gap-4">
             <a
@@ -124,15 +123,6 @@ export default async function Home() {
               className="hover:text-[#d84715] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d84715] rounded-sm"
             >
               GitHub ↗
-            </a>
-            <span aria-hidden="true" className="text-[#8e877a]">•</span>
-            <a
-              href="https://x.com/bennetleff"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-[#d84715] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d84715] rounded-sm"
-            >
-              X / Twitter ↗
             </a>
           </div>
           <span className="text-[#8e877a]">© {new Date().getFullYear()} Bennet Leff</span>
