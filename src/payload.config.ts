@@ -55,7 +55,15 @@ export default buildConfig({
       ? [
           s3Storage({
             collections: {
-              media: true,
+              media: {
+                generateFileURL: ({ filename, prefix }) => {
+                  const publicUrl = process.env.R2_PUBLIC_URL || process.env.NEXT_PUBLIC_R2_URL
+                  if (publicUrl) {
+                    return `${publicUrl.replace(/\/$/, '')}/${prefix ? `${prefix}/` : ''}${filename}`
+                  }
+                  return `/api/media/file/${filename}`
+                },
+              },
             },
             bucket: process.env.R2_BUCKET || 'blog-media',
             config: {
