@@ -18,6 +18,36 @@ const nextConfig = {
     'pg-cloudflare',
   ],
 
+  async redirects() {
+    return [
+      {
+        source: '/admin/posts',
+        destination: '/admin/collections/posts',
+        permanent: false,
+      },
+      {
+        source: '/admin/media',
+        destination: '/admin/collections/media',
+        permanent: false,
+      },
+      {
+        source: '/admin/users',
+        destination: '/admin/collections/users',
+        permanent: false,
+      },
+      {
+        source: '/admin/analytics',
+        destination: '/admin/collections/page_views',
+        permanent: false,
+      },
+      {
+        source: '/admin/page_views',
+        destination: '/admin/collections/page_views',
+        permanent: false,
+      },
+    ]
+  },
+
   async headers() {
     return [
       {
