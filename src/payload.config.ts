@@ -41,6 +41,9 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    components: {
+      afterDashboard: ['/components/admin/DashboardOverview#DashboardOverview'],
+    },
   },
   collections: [Users, Media, Posts, PageViews],
   editor: lexicalEditor({
