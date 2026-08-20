@@ -4,7 +4,6 @@ import { sqliteD1Adapter } from '@payloadcms/db-d1-sqlite'
 import { lexicalEditor, BlocksFeature, CodeBlock } from '@payloadcms/richtext-lexical'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
-import { r2Storage } from '@payloadcms/storage-r2'
 import { s3Storage } from '@payloadcms/storage-s3'
 
 import { Users } from './collections/Users'
@@ -62,37 +61,28 @@ export default buildConfig({
     push: false,
   }),
   plugins: [
-    ...(cloudflare?.env?.R2
-      ? [
-          r2Storage({
-            bucket: cloudflare.env.R2 as any,
-            collections: { media: true },
-          }),
-        ]
-      : [
-          s3Storage({
-            collections: {
-              media: {
-                generateFileURL: ({ filename, prefix }) => {
-                  const publicUrl = process.env.R2_PUBLIC_URL || process.env.NEXT_PUBLIC_R2_URL
-                  if (publicUrl) {
-                    return `${publicUrl.replace(/\/$/, '')}/${prefix ? `${prefix}/` : ''}${filename}`
-                  }
-                  return `/api/media/file/${filename}`
-                },
-              },
-            },
-            bucket: r2Bucket,
-            config: {
-              credentials: {
-                accessKeyId: r2AccessKeyId,
-                secretAccessKey: r2SecretAccessKey,
-              },
-              region: 'auto',
-              endpoint: `https://${r2AccountId}.r2.cloudflarestorage.com`,
-            },
-          }),
-        ]),
+    s3Storage({
+      collections: {
+        media: {
+          generateFileURL: ({ filename, prefix }) => {
+            const publicUrl = process.env.R2_PUBLIC_URL || process.env.NEXT_PUBLIC_R2_URL
+            if (publicUrl) {
+              return `${publicUrl.replace(/\/$/, '')}/${prefix ? `${prefix}/` : ''}${filename}`
+            }
+            return `/api/media/file/${filename}`
+          },
+        },
+      },
+      bucket: r2Bucket,
+      config: {
+        credentials: {
+          accessKeyId: r2AccessKeyId,
+          secretAccessKey: r2SecretAccessKey,
+        },
+        region: 'auto',
+        endpoint: `https://${r2AccountId}.r2.cloudflarestorage.com`,
+      },
+    }),
   ],
 })
 
