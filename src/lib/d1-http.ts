@@ -9,6 +9,19 @@ export function createD1HttpClient(config: D1HttpConfig) {
   const baseUrl = `https://api.cloudflare.com/client/v4/accounts/${accountId}/d1/database/${databaseId}`
 
   async function executeHttp(sql: string, params: any[] = []) {
+    const trimmed = sql.trim().toLowerCase()
+    // D1 REST API executes each HTTP request as an atomic transaction.
+    // Intercept standalone transaction control statements to prevent HTTP errors.
+    if (
+      trimmed.startsWith('begin') ||
+      trimmed.startsWith('commit') ||
+      trimmed.startsWith('rollback') ||
+      trimmed.startsWith('savepoint') ||
+      trimmed.startsWith('release')
+    ) {
+      return { results: [], success: true, meta: {} }
+    }
+
     if (!apiToken) {
       return { results: [], success: true, meta: {} }
     }
