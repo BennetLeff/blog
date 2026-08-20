@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { postGrotesk, ogg, otSectorNarrow } from "./fonts";
+import { AnalyticsTracker } from "@/components/AnalyticsTracker";
 import "./globals.css";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://whoisben.net";
@@ -55,6 +56,7 @@ export default function FrontendLayout({
       className={`${postGrotesk.variable} ${ogg.variable} ${otSectorNarrow.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">
+        <AnalyticsTracker />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#d84715] focus:text-white focus:font-mono focus:text-sm focus:rounded focus:shadow-lg focus:outline-none"

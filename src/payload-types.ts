@@ -70,6 +70,7 @@ export interface Config {
     users: User;
     media: Media;
     posts: Post;
+    page_views: PageView;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -80,6 +81,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
+    page_views: PageViewsSelect<false> | PageViewsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -173,11 +175,15 @@ export interface Post {
    */
   slug: string;
   /**
-   * Display date, e.g. "Aug 2026"
+   * Publication timestamp (used for sorting and displaying newest posts first)
+   */
+  publishedAt?: string | null;
+  /**
+   * Custom display date override, e.g. "Aug 2026"
    */
   date?: string | null;
   /**
-   * e.g. "AI / Math", "Systems", "Design"
+   * e.g. "Tinkering", "Architecture", "AI / Math"
    */
   category?: string | null;
   readingTime?: string | null;
@@ -198,6 +204,45 @@ export interface Post {
     [k: string]: unknown;
   } | null;
   status?: ('draft' | 'published') | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page_views".
+ */
+export interface PageView {
+  id: number;
+  /**
+   * Page or essay path visited (e.g. /posts/hurdy-gurdy-simulator)
+   */
+  path: string;
+  /**
+   * City detected from IP geolocation
+   */
+  city?: string | null;
+  /**
+   * Country code (e.g. US, DE, GB)
+   */
+  country?: string | null;
+  /**
+   * State / Region code (e.g. CA, NY)
+   */
+  region?: string | null;
+  /**
+   * Referring website (e.g. twitter.com, news.ycombinator.com, github.com)
+   */
+  referrer?: string | null;
+  /**
+   * Browser and operating system user agent
+   */
+  userAgent?: string | null;
+  /**
+   * Anonymized visitor identifier for counting unique visitors
+   */
+  ipHash?: string | null;
+  latitude?: number | null;
+  longitude?: number | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -236,6 +281,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'posts';
         value: number | Post;
+      } | null)
+    | ({
+        relationTo: 'page_views';
+        value: number | PageView;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -324,12 +373,30 @@ export interface MediaSelect<T extends boolean = true> {
 export interface PostsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
+  publishedAt?: T;
   date?: T;
   category?: T;
   readingTime?: T;
   excerpt?: T;
   content?: T;
   status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page_views_select".
+ */
+export interface PageViewsSelect<T extends boolean = true> {
+  path?: T;
+  city?: T;
+  country?: T;
+  region?: T;
+  referrer?: T;
+  userAgent?: T;
+  ipHash?: T;
+  latitude?: T;
+  longitude?: T;
   updatedAt?: T;
   createdAt?: T;
 }
