@@ -17,6 +17,24 @@ const dirname = path.dirname(filename)
 
 const cloudflare = await getCloudflareContext()
 
+const r2AccessKeyId =
+  process.env.R2_ACCESS_KEY_ID ||
+  process.env.CLOUDFLARE_R2_ACCESS_KEY_ID ||
+  'ac0476fa1d6aa11ccc9a4cb030d360a3'
+
+const r2SecretAccessKey =
+  process.env.R2_SECRET_ACCESS_KEY ||
+  process.env.CLOUDFLARE_R2_SECRET_ACCESS_KEY ||
+  '2491a8158dd7926ceaa59a226568b41b7842dde67de38910d7692bcab2b262ec'
+
+const r2AccountId =
+  process.env.CLOUDFLARE_ACCOUNT_ID ||
+  '03f642afe070f05b727f7cd31f02ef48'
+
+const r2Bucket =
+  process.env.R2_BUCKET ||
+  'blog-media'
+
 export default buildConfig({
   admin: {
     user: Users.slug,
@@ -51,8 +69,7 @@ export default buildConfig({
             collections: { media: true },
           }),
         ]
-      : (process.env.R2_ACCESS_KEY_ID || process.env.CLOUDFLARE_R2_ACCESS_KEY_ID || process.env.VERCEL)
-      ? [
+      : [
           s3Storage({
             collections: {
               media: {
@@ -65,18 +82,17 @@ export default buildConfig({
                 },
               },
             },
-            bucket: process.env.R2_BUCKET || 'blog-media',
+            bucket: r2Bucket,
             config: {
               credentials: {
-                accessKeyId: process.env.R2_ACCESS_KEY_ID || process.env.CLOUDFLARE_R2_ACCESS_KEY_ID || '',
-                secretAccessKey: process.env.R2_SECRET_ACCESS_KEY || process.env.CLOUDFLARE_R2_SECRET_ACCESS_KEY || '',
+                accessKeyId: r2AccessKeyId,
+                secretAccessKey: r2SecretAccessKey,
               },
               region: 'auto',
-              endpoint: `https://${process.env.CLOUDFLARE_ACCOUNT_ID || '03f642afe070f05b727f7cd31f02ef48'}.r2.cloudflarestorage.com`,
+              endpoint: `https://${r2AccountId}.r2.cloudflarestorage.com`,
             },
           }),
-        ]
-      : []),
+        ]),
   ],
 })
 
