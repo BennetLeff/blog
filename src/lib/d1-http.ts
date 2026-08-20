@@ -60,6 +60,69 @@ export function createD1HttpClient(config: D1HttpConfig) {
     }
   }
 
+  async function executeRaw(sql: string, params: any[] = []): Promise<any[][]> {
+    const trimmed = sql.trim().toLowerCase()
+    if (
+      trimmed.startsWith('begin') ||
+      trimmed.startsWith('commit') ||
+      trimmed.startsWith('rollback') ||
+      trimmed.startsWith('savepoint') ||
+      trimmed.startsWith('release')
+    ) {
+      return []
+    }
+
+    if (!apiToken) {
+      return []
+    }
+
+    try {
+      const res = await fetch(`${baseUrl}/raw`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${apiToken}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          sql,
+          params,
+        }),
+        cache: 'no-store',
+      })
+
+      if (!res.ok) {
+        // Fallback: execute /query and map by column keys
+        const queryRes = await executeHttp(sql, params)
+        const results = queryRes.results || []
+        if (results.length === 0) return []
+        // Extract columns in sql order if possible
+        return results.map((row: any) => Object.values(row))
+      }
+
+      const data = await res.json() as any
+      if (!data.success) {
+        return []
+      }
+
+      // Cloudflare D1 /raw endpoint returns: data.result[0].results.rows: [[val1, val2, ...]]
+      const rows = data.result?.[0]?.results?.rows
+      if (Array.isArray(rows)) {
+        return rows
+      }
+
+      // If /raw returned results directly as array
+      const directResults = data.result?.[0]?.results
+      if (Array.isArray(directResults)) {
+        return directResults
+      }
+
+      return []
+    } catch (err) {
+      console.warn('D1 executeRaw error:', err)
+      return []
+    }
+  }
+
   function createPreparedStatement(sql: string, params: any[] = []) {
     return {
       bind(...newParams: any[]) {
@@ -88,9 +151,7 @@ export function createD1HttpClient(config: D1HttpConfig) {
         }
       },
       async raw() {
-        const result = await executeHttp(sql, params)
-        const rows = result.results || []
-        return rows.map((row: any) => (row && typeof row === 'object' ? Object.values(row) : [row]))
+        return executeRaw(sql, params)
       },
     }
   }
