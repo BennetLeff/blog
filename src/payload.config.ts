@@ -54,6 +54,22 @@ export default buildConfig({
 })
 
 async function getCloudflareContext(): Promise<any> {
+  // 1. Production / Vercel with Cloudflare API Token (direct HTTP connection to D1)
+  if (process.env.CLOUDFLARE_API_TOKEN) {
+    try {
+      const { createD1HttpClient } = await import('./lib/d1-http')
+      const client = createD1HttpClient({
+        accountId: process.env.CLOUDFLARE_ACCOUNT_ID || '03f642afe070f05b727f7cd31f02ef48',
+        databaseId: process.env.CLOUDFLARE_DATABASE_ID || '59827847-99eb-48cb-8df2-af50185c82ca',
+        apiToken: process.env.CLOUDFLARE_API_TOKEN,
+      })
+      return { env: { D1: client } }
+    } catch (err) {
+      console.error('Failed to initialize D1 HTTP client:', err)
+    }
+  }
+
+  // 2. Local development with Wrangler platform proxy
   if ((globalThis as any).__cf_proxy) {
     return (globalThis as any).__cf_proxy
   }
