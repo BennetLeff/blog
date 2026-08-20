@@ -15,7 +15,7 @@ import { PageViews } from './collections/PageViews'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
-const cloudflare = await getCloudflareContext()
+const cloudflare = typeof window === 'undefined' ? await getCloudflareContext() : { env: {} }
 
 const r2AccessKeyId =
   process.env.R2_ACCESS_KEY_ID ||
@@ -104,6 +104,10 @@ function resolveDatabaseUuid(id?: string): string {
 }
 
 async function getCloudflareContext(): Promise<any> {
+  if (typeof window !== 'undefined') {
+    return { env: {} }
+  }
+
   // 1. Production / Vercel with Cloudflare API Token (direct HTTP connection to D1)
   if (process.env.CLOUDFLARE_API_TOKEN || process.env.VERCEL || process.env.NODE_ENV === 'production') {
     try {
