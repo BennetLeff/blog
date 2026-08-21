@@ -75,17 +75,20 @@ const customJSXConverters = {
     Code: ({ node }: any) => {
       const code = node.fields?.code || "";
       const language = node.fields?.language || "text";
-      return <CodeRenderer code={code} language={language} />;
+      const filename = node.fields?.filename || undefined;
+      return <CodeRenderer code={code} language={language} filename={filename} />;
     },
     code: ({ node }: any) => {
       const code = node.fields?.code || "";
       const language = node.fields?.language || "text";
-      return <CodeRenderer code={code} language={language} />;
+      const filename = node.fields?.filename || undefined;
+      return <CodeRenderer code={code} language={language} filename={filename} />;
     },
     CodeBlock: ({ node }: any) => {
       const code = node.fields?.code || "";
       const language = node.fields?.language || "text";
-      return <CodeRenderer code={code} language={language} />;
+      const filename = node.fields?.filename || undefined;
+      return <CodeRenderer code={code} language={language} filename={filename} />;
     },
   },
   code: ({ node }: any) => {

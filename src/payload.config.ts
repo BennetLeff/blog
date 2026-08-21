@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import { sqliteD1Adapter } from '@payloadcms/db-d1-sqlite'
-import { lexicalEditor, BlocksFeature, CodeBlock, FixedToolbarFeature, InlineToolbarFeature } from '@payloadcms/richtext-lexical'
+import { lexicalEditor, BlocksFeature, FixedToolbarFeature, InlineToolbarFeature } from '@payloadcms/richtext-lexical'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import { s3Storage } from '@payloadcms/storage-s3'
@@ -10,6 +10,7 @@ import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Posts } from './collections/Posts'
 import { PageViews } from './collections/PageViews'
+import { CodeSnippetBlock } from './blocks/CodeSnippet'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -49,7 +50,7 @@ export default buildConfig({
       InlineToolbarFeature(),
       BlocksFeature({
         blocks: [
-          CodeBlock(),
+          CodeSnippetBlock,
         ],
       }),
     ],
