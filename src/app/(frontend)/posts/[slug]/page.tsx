@@ -1,17 +1,18 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getPosts, getPostBySlug } from "@/lib/posts";
-import { RichText, defaultJSXConverters } from "@payloadcms/richtext-lexical/react";
+import { getPostBySlug, getPosts } from "@/lib/posts";
+import { RichText } from "@payloadcms/richtext-lexical/react";
+import { defaultJSXConverters } from "@payloadcms/richtext-lexical/react";
 import { CodeRenderer } from "@/components/CodeRenderer";
-import type { Metadata } from "next";
-
-export const revalidate = 60;
 
 interface PageProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{
+    slug: string;
+  }>;
 }
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://whoisben.net";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.whoisben.net";
 
 export async function generateStaticParams() {
   const posts = await getPosts();
@@ -20,10 +21,17 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
-  if (!post) return { title: "Post Not Found" };
+
+  if (!post) {
+    return {
+      title: "Post Not Found",
+    };
+  }
 
   const postUrl = `${siteUrl}/posts/${post.slug}`;
 
@@ -51,6 +59,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
+function extractNodeText(node: any): string {
+  if (!node) return "";
+  if (typeof node === "string") return node;
+  if (node.text) return node.text;
+  if (Array.isArray(node.children)) {
+    return node.children.map(extractNodeText).join("\n");
+  }
+  return "";
+}
+
 const customJSXConverters = {
   ...defaultJSXConverters,
   blocks: {
@@ -59,6 +77,21 @@ const customJSXConverters = {
       const language = node.fields?.language || "text";
       return <CodeRenderer code={code} language={language} />;
     },
+    code: ({ node }: any) => {
+      const code = node.fields?.code || "";
+      const language = node.fields?.language || "text";
+      return <CodeRenderer code={code} language={language} />;
+    },
+    CodeBlock: ({ node }: any) => {
+      const code = node.fields?.code || "";
+      const language = node.fields?.language || "text";
+      return <CodeRenderer code={code} language={language} />;
+    },
+  },
+  code: ({ node }: any) => {
+    const code = extractNodeText(node);
+    const language = node.language || "text";
+    return <CodeRenderer code={code} language={language} />;
   },
 };
 

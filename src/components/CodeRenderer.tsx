@@ -1,9 +1,9 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Prism from 'prismjs'
 
-// Import core language components
+// Import Prism core and language syntax highlighters
 import 'prismjs/components/prism-clike'
 import 'prismjs/components/prism-javascript'
 import 'prismjs/components/prism-typescript'
@@ -20,30 +20,46 @@ import 'prismjs/components/prism-go'
 import 'prismjs/components/prism-toml'
 import 'prismjs/components/prism-yaml'
 import 'prismjs/components/prism-markdown'
+import 'prismjs/components/prism-diff'
+import 'prismjs/components/prism-docker'
+import 'prismjs/components/prism-css'
+import 'prismjs/components/prism-markup' // HTML / XML
 
 interface CodeRendererProps {
   code: string
   language?: string
+  filename?: string
 }
 
 const languageAliases: Record<string, string> = {
   js: 'javascript',
   ts: 'typescript',
+  tsx: 'tsx',
+  jsx: 'jsx',
   rs: 'rust',
   py: 'python',
   sh: 'bash',
   shell: 'bash',
   zsh: 'bash',
   yml: 'yaml',
+  golang: 'go',
+  html: 'markup',
+  xml: 'markup',
+  svg: 'markup',
+  docker: 'docker',
+  dockerfile: 'docker',
+  patch: 'diff',
 }
 
-export function CodeRenderer({ code, language = 'text' }: CodeRendererProps) {
+export function CodeRenderer({ code, language = 'text', filename }: CodeRendererProps) {
   const [copied, setCopied] = useState(false)
+
+  const rawCode = typeof code === 'string' ? code : String(code || '')
   const normalizedLang = languageAliases[language.toLowerCase()] || language.toLowerCase()
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(code)
+      await navigator.clipboard.writeText(rawCode)
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     } catch (err) {
@@ -52,15 +68,18 @@ export function CodeRenderer({ code, language = 'text' }: CodeRendererProps) {
   }
 
   const grammar = Prism.languages[normalizedLang] || Prism.languages.text
-  const highlightedCode = grammar ? Prism.highlight(code, grammar, normalizedLang) : code
+  const highlightedCode = grammar ? Prism.highlight(rawCode, grammar, normalizedLang) : escapeHtml(rawCode)
 
   return (
     <div className="my-6 rounded-lg border border-[#d4cdc0] bg-[#ded7c8] overflow-hidden shadow-xs">
       {/* Header bar */}
       <div className="flex items-center justify-between px-4 py-2 border-b border-[#d4cdc0] bg-[#d6cfbe]/60 text-xs font-mono text-[#575249]">
-        <span className="uppercase tracking-wider font-medium">
-          {language || 'code'}
-        </span>
+        <div className="flex items-center gap-2">
+          {filename && <span className="font-medium text-[#1c1a17]">{filename}</span>}
+          <span className="uppercase tracking-wider font-semibold opacity-75">
+            {language || 'code'}
+          </span>
+        </div>
         <button
           type="button"
           onClick={handleCopy}
@@ -91,12 +110,22 @@ export function CodeRenderer({ code, language = 'text' }: CodeRendererProps) {
       </div>
 
       {/* Code body */}
-      <pre className="p-4 overflow-x-auto text-sm leading-relaxed font-mono custom-scrollbar text-[#1c1a17]">
+      <pre className="p-4 overflow-x-auto text-sm leading-relaxed font-mono custom-scrollbar text-[#1c1a17] m-0 bg-transparent">
         <code
           className={`language-${normalizedLang}`}
+          style={{ whiteSpace: 'pre', wordSpacing: 'normal', wordBreak: 'normal', tabSize: 2 }}
           dangerouslySetInnerHTML={{ __html: highlightedCode }}
         />
       </pre>
     </div>
   )
+}
+
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;')
 }

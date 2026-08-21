@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import { sqliteD1Adapter } from '@payloadcms/db-d1-sqlite'
-import { lexicalEditor, BlocksFeature, CodeBlock } from '@payloadcms/richtext-lexical'
+import { lexicalEditor, BlocksFeature, CodeBlock, FixedToolbarFeature, InlineToolbarFeature } from '@payloadcms/richtext-lexical'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import { s3Storage } from '@payloadcms/storage-s3'
@@ -45,6 +45,8 @@ export default buildConfig({
   editor: lexicalEditor({
     features: ({ defaultFeatures }) => [
       ...defaultFeatures,
+      FixedToolbarFeature(),
+      InlineToolbarFeature(),
       BlocksFeature({
         blocks: [
           CodeBlock(),

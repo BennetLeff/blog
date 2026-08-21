@@ -146,9 +146,33 @@ h6 {
   font-size: 0.88em;
   background-color: #ded7c8;
   border: 1px solid #d4cdc0;
-  padding: 0.15em 0.4em;
+  padding: 0.15em 0.45em;
   border-radius: 0.25rem;
   color: #8f2b05;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.payload-richtext pre {
+  background-color: #ded7c8;
+  border: 1px solid #d4cdc0;
+  border-radius: 0.5rem;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.9em;
+  line-height: 1.6;
+  color: #1c1a17;
+}
+
+.payload-richtext pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+  white-space: pre;
 }
 
 .payload-richtext blockquote {
