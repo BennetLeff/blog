@@ -31,8 +31,8 @@ export async function GET(req: NextRequest) {
         `SELECT city, country, count(*) as count FROM page_views WHERE city IS NOT NULL AND city != '' GROUP BY city, country ORDER BY count DESC LIMIT 10;`,
         // 5: Top Referrers
         `SELECT referrer, count(*) as count FROM page_views WHERE referrer IS NOT NULL AND referrer != '' GROUP BY referrer ORDER BY count DESC LIMIT 10;`,
-        // 6: Recent 10 visitors
-        `SELECT id, path, city, country, referrer, user_agent, created_at FROM page_views ORDER BY id DESC LIMIT 10;`
+        // 6: Recent 25 visitors with IP
+        `SELECT id, path, ip, city, country, region, referrer, user_agent, created_at FROM page_views ORDER BY id DESC LIMIT 25;`
       ].join('\n')
 
       const res = await fetch(`https://api.cloudflare.com/client/v4/accounts/${accountId}/d1/database/${databaseId}/query`, {
@@ -154,7 +154,7 @@ export async function GET(req: NextRequest) {
       topCountries,
       topCities,
       topReferrers,
-      recent: docs.slice(0, 10),
+      recent: docs.slice(0, 25),
     })
   } catch (err: any) {
     console.error('Analytics stats error:', err)

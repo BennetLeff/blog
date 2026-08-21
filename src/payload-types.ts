@@ -208,6 +208,8 @@ export interface Post {
   createdAt: string;
 }
 /**
+ * 📊 Visual Traffic Dashboard available at /analytics
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "page_views".
  */
@@ -217,6 +219,10 @@ export interface PageView {
    * Page or essay path visited (e.g. /posts/hurdy-gurdy-simulator)
    */
   path: string;
+  /**
+   * Visitor IP address
+   */
+  ip?: string | null;
   /**
    * City detected from IP geolocation
    */
@@ -389,6 +395,7 @@ export interface PostsSelect<T extends boolean = true> {
  */
 export interface PageViewsSelect<T extends boolean = true> {
   path?: T;
+  ip?: T;
   city?: T;
   country?: T;
   region?: T;

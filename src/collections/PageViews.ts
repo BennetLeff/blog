@@ -9,7 +9,8 @@ export const PageViews: CollectionConfig = {
   defaultSort: '-createdAt',
   admin: {
     useAsTitle: 'path',
-    defaultColumns: ['path', 'city', 'country', 'referrer', 'createdAt'],
+    defaultColumns: ['path', 'ip', 'city', 'country', 'referrer', 'createdAt'],
+    description: '📊 Visual Traffic Dashboard available at /analytics',
   },
   access: {
     read: ({ req: { user } }) => Boolean(user),
@@ -24,6 +25,13 @@ export const PageViews: CollectionConfig = {
       required: true,
       admin: {
         description: 'Page or essay path visited (e.g. /posts/hurdy-gurdy-simulator)',
+      },
+    },
+    {
+      name: 'ip',
+      type: 'text',
+      admin: {
+        description: 'Visitor IP address',
       },
     },
     {

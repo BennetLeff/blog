@@ -37,7 +37,7 @@ const nextConfig = {
       },
       {
         source: '/admin/analytics',
-        destination: '/admin/collections/page_views',
+        destination: '/analytics',
         permanent: false,
       },
       {

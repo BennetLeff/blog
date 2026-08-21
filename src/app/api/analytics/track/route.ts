@@ -69,7 +69,7 @@ export async function POST(req: NextRequest) {
 
     if (apiToken) {
       try {
-        const sql = `INSERT INTO page_views (path, country, city, region, latitude, longitude, referrer, user_agent, ip_hash, created_at, updated_at) VALUES (${sqlEscape(path)}, ${sqlEscape(country)}, ${sqlEscape(city)}, ${sqlEscape(region)}, ${latitude !== null ? latitude : 'NULL'}, ${longitude !== null ? longitude : 'NULL'}, ${sqlEscape(referrer)}, ${sqlEscape(userAgent)}, ${sqlEscape(ipHash)}, ${sqlEscape(now)}, ${sqlEscape(now)});`
+        const sql = `INSERT INTO page_views (path, country, city, region, latitude, longitude, referrer, user_agent, ip, ip_hash, created_at, updated_at) VALUES (${sqlEscape(path)}, ${sqlEscape(country)}, ${sqlEscape(city)}, ${sqlEscape(region)}, ${latitude !== null ? latitude : 'NULL'}, ${longitude !== null ? longitude : 'NULL'}, ${sqlEscape(referrer)}, ${sqlEscape(userAgent)}, ${sqlEscape(rawIp)}, ${sqlEscape(ipHash)}, ${sqlEscape(now)}, ${sqlEscape(now)});`
         await fetch(`https://api.cloudflare.com/client/v4/accounts/${accountId}/d1/database/${databaseId}/query`, {
           method: 'POST',
           headers: {
@@ -99,6 +99,7 @@ export async function POST(req: NextRequest) {
           longitude: longitude || undefined,
           referrer: referrer || undefined,
           userAgent,
+          ip: rawIp,
           ipHash,
         },
       })
