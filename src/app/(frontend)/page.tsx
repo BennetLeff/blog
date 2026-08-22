@@ -45,7 +45,7 @@ export default async function Home() {
         className="min-h-screen max-w-6xl mx-auto px-6 sm:px-12 py-16 sm:py-20 flex flex-col justify-start"
       >
         <header className="mb-8 sm:mb-12">
-          <h1 className="text-7xl sm:text-8xl md:text-9xl lg:text-[11rem] font-normal tracking-tight leading-[0.9] text-[#d84715] font-heading">
+          <h1 className="inline-block w-fit text-7xl sm:text-8xl md:text-9xl lg:text-[11rem] font-normal tracking-tight leading-[0.9] text-[#d84715] font-heading border-2 sm:border-[3px] md:border-4 border-[#d84715] rounded-2xl sm:rounded-3xl md:rounded-[2.5rem] lg:rounded-[3rem] px-6 sm:px-10 md:px-12 py-3 sm:py-5 md:py-6">
             Bennet Leff
           </h1>
         </header>
