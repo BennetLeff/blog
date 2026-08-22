@@ -40,6 +40,8 @@ h6 {
 .font-heading,
 .font-sector-narrow {
   font-family: var(--font-ot-sector-narrow), sans-serif;
+  -webkit-text-stroke: 1.5px currentColor;
+  paint-order: stroke fill;
 }
 
 .font-subtitle,
