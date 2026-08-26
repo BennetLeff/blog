@@ -1,12 +1,13 @@
 import { withPayload } from '@payloadcms/next/withPayload'
+import type { NextConfig } from 'next'
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
   poweredByHeader: false,
   images: {
-    localPatterns: [
+    remotePatterns: [
       {
-        pathname: '/api/media/file/**',
+        protocol: 'https',
+        hostname: 'pub-623f80b8688644d286a38f49e123ab86.r2.dev',
       },
     ],
   },
