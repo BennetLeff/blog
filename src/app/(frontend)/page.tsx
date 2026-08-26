@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getPosts } from "@/lib/posts";
+import { CatStamp } from "@/components/CatStamp";
 
 export const revalidate = 60;
 
@@ -42,8 +43,13 @@ export default async function Home() {
       />
       <main
         id="main-content"
-        className="min-h-screen max-w-6xl mx-auto px-6 sm:px-12 py-16 sm:py-20 flex flex-col justify-start"
+        className="min-h-screen max-w-6xl mx-auto px-6 sm:px-12 py-16 sm:py-20 flex flex-col justify-start relative"
       >
+        {/* Interactive Cat Stamp with Circular Cursive Hover Animation */}
+        <div className="absolute top-3 sm:top-6 right-4 sm:right-10 z-20">
+          <CatStamp />
+        </div>
+
         <header className="mb-8 sm:mb-12">
           <h1 className="text-7xl sm:text-8xl md:text-9xl lg:text-[11rem] font-normal tracking-tight leading-[0.9] text-[#d84715] font-heading">
             Bennet Leff
