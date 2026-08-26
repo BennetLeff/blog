@@ -130,15 +130,6 @@ export default async function Home() {
             >
               GitHub ↗
             </a>
-            <span aria-hidden="true" className="text-[#8e877a]">•</span>
-            <a
-              href="/infisical-intro"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-[#d84715] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d84715] rounded-sm"
-            >
-              Infisical Intro ↗
-            </a>
           </div>
           <span className="text-[#8e877a]">© {new Date().getFullYear()} Bennet Leff</span>
         </footer>
