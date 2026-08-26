@@ -52,6 +52,23 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
+        source: '/resume.pdf',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=0, must-revalidate',
+          },
+          {
+            key: 'CDN-Cache-Control',
+            value: 'max-age=0, must-revalidate',
+          },
+          {
+            key: 'Cloudflare-CDN-Cache-Control',
+            value: 'max-age=0, must-revalidate',
+          },
+        ],
+      },
+      {
         source: '/fonts/:path*',
         headers: [
           {
@@ -65,7 +82,7 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        source: '/((?!admin|api).*)',
+        source: '/((?!admin|api|resume\\.pdf).*)',
         headers: [
           {
             key: 'Cache-Control',

@@ -114,7 +114,7 @@ export default async function Home() {
         <footer className="mt-16 pt-6 border-t border-[#d4cdc0] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-xs sm:text-sm font-mono text-[#575249]">
           <div className="flex items-center gap-4">
             <a
-              href="/resume.pdf"
+              href="/resume.pdf?v=20260826"
               target="_blank"
               rel="noopener noreferrer"
               className="text-[#1c1a17] hover:text-[#d84715] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d84715] rounded-sm"
