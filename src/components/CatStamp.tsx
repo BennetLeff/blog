@@ -1,11 +1,9 @@
 'use client'
 
-import React, { useState } from 'react'
+import React from 'react'
 import Image from 'next/image'
 
 export function CatStamp() {
-  const [imgSrc, setImgSrc] = useState('/dalia.png')
-
   return (
     <div className="group relative w-28 h-28 sm:w-36 sm:h-36 flex items-center justify-center cursor-pointer select-none">
       {/* Circular Rotating Cursive Text Ring that animates in on hover */}
@@ -41,13 +39,12 @@ export function CatStamp() {
       {/* Cat Stamp Sticker */}
       <div className="relative z-20 transition-transform duration-300 ease-out rotate-[10deg] group-hover:rotate-[4deg] group-hover:scale-105">
         <Image
-          src={imgSrc}
+          src="https://pub-623f80b8688644d286a38f49e123ab86.r2.dev/dalia.png"
           alt="Dalia"
           width={140}
           height={140}
           unoptimized
           priority
-          onError={() => setImgSrc('https://pub-623f80b8688644d286a38f49e123ab86.r2.dev/dalia.png')}
           className="w-20 h-20 sm:w-28 sm:h-28 drop-shadow-md"
         />
       </div>
