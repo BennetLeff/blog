@@ -92,7 +92,7 @@ export default async function Home() {
                   href="/resume.pdf?v=20260826-1423"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-black hover:text-[#EE3338] font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black rounded-xs"
+                  className="text-black hover:text-[#1B3064] hover:underline hover:decoration-[#3DB4F8] hover:decoration-2 hover:underline-offset-4 font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black rounded-xs"
                 >
                   Resume ↗
                 </a>
@@ -101,7 +101,7 @@ export default async function Home() {
                   href="https://github.com/BennetLeff"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-black hover:text-[#EE3338] font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black rounded-xs"
+                  className="text-black hover:text-[#1B3064] hover:underline hover:decoration-[#3DB4F8] hover:decoration-2 hover:underline-offset-4 font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black rounded-xs"
                 >
                   GitHub ↗
                 </a>
@@ -194,7 +194,7 @@ export default async function Home() {
                         )}
                       </div>
 
-                      <h3 className="text-lg sm:text-xl font-bold text-black transition-colors group-hover:text-[#EE3338] leading-snug">
+                      <h3 className="text-lg sm:text-xl font-bold text-black transition-all group-hover:text-[#1B3064] group-hover:underline group-hover:decoration-[#3DB4F8] group-hover:decoration-2 group-hover:underline-offset-4 leading-snug">
                         {post.title}
                       </h3>
 

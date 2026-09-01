@@ -149,7 +149,7 @@ export default async function PostPage({ params }: PageProps) {
         <nav aria-label="Breadcrumb" className="mb-12">
           <Link
             href="/"
-            className="inline-flex items-center text-sm font-mono text-black/80 hover:text-[#EE3338] font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black rounded-xs transition-colors"
+            className="inline-flex items-center text-sm font-mono text-black/80 hover:text-[#1B3064] hover:underline hover:decoration-[#3DB4F8] hover:decoration-2 hover:underline-offset-4 font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black rounded-xs transition-all"
           >
             ← Bennet Leff
           </Link>
@@ -201,7 +201,7 @@ export default async function PostPage({ params }: PageProps) {
         <footer className="mt-20 pt-8 border-t border-black/15 flex justify-between items-center text-sm font-mono text-black/75">
           <Link
             href="/"
-            className="hover:text-[#EE3338] font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black rounded-xs transition-colors"
+            className="hover:text-[#1B3064] hover:underline hover:decoration-[#3DB4F8] hover:decoration-2 hover:underline-offset-4 font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black rounded-xs transition-all"
           >
             ← Back to writing
           </Link>
