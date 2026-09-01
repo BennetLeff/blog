@@ -14,18 +14,19 @@
 }
 
 :root {
-  --background: #EAF2E7;
-  --foreground: #5C0036;
-  --accent: #882453;
-  --title-orange: #882453;
-  --muted: rgba(92, 0, 54, 0.75);
-  --subtle: rgba(92, 0, 54, 0.70);
-  --border: rgba(92, 0, 54, 0.18);
+  --background: #FFA07A;
+  --foreground: #050505;
+  --accent-cyan: #3DB4F8;
+  --accent-red: #EE3338;
+  --card-bg: #FFF9EC;
+  --muted: rgba(5, 5, 5, 0.72);
+  --subtle: rgba(5, 5, 5, 0.55);
+  --border: rgba(0, 0, 0, 0.18);
 }
 
 body {
-  background-color: #EAF2E7;
-  color: #5C0036;
+  background-color: #FFA07A;
+  color: #050505;
   font-family: var(--font-ronzino), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
@@ -37,7 +38,7 @@ h4,
 h5,
 h6 {
   font-family: var(--font-ronzino), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  color: #5C0036;
+  color: #050505;
 }
 
 /* Special heading font ONLY for main site title */
@@ -65,7 +66,7 @@ h6 {
   font-size: 1.1875rem;
   line-height: 1.75;
   letter-spacing: -0.01em;
-  color: #5C0036;
+  color: #050505;
 }
 
 .payload-richtext h1 {
@@ -75,7 +76,7 @@ h6 {
   letter-spacing: -0.02em;
   margin-top: 2.25rem;
   margin-bottom: 1rem;
-  color: #5C0036;
+  color: #050505;
 }
 
 .payload-richtext h2 {
@@ -85,7 +86,7 @@ h6 {
   letter-spacing: -0.02em;
   margin-top: 1.85rem;
   margin-bottom: 0.75rem;
-  color: #5C0036;
+  color: #050505;
 }
 
 .payload-richtext h3 {
@@ -95,7 +96,7 @@ h6 {
   letter-spacing: -0.01em;
   margin-top: 1.5rem;
   margin-bottom: 0.5rem;
-  color: #5C0036;
+  color: #050505;
 }
 
 .payload-richtext h4 {
@@ -104,19 +105,19 @@ h6 {
   font-weight: 600;
   margin-top: 1.75rem;
   margin-bottom: 0.5rem;
-  color: #5C0036;
+  color: #050505;
 }
 
 .payload-richtext a {
-  color: #5C0036;
+  color: #050505;
   text-decoration: underline;
   text-underline-offset: 3px;
-  text-decoration-color: #882453;
+  text-decoration-color: #EE3338;
   transition: color 0.2s, text-decoration-color 0.2s;
 }
 
 .payload-richtext a:hover {
-  color: #882453;
+  color: #EE3338;
 }
 
 .payload-richtext p {
@@ -146,7 +147,7 @@ h6 {
 }
 
 .payload-richtext li::marker {
-  color: #882453;
+  color: #EE3338;
 }
 
 .payload-richtext li p {
@@ -156,26 +157,28 @@ h6 {
 .payload-richtext code:not(pre code) {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.88em;
-  background-color: rgba(92, 0, 54, 0.06);
-  border: 1px solid rgba(92, 0, 54, 0.15);
+  background-color: #FFF9EC;
+  border: 1px solid rgba(0, 0, 0, 0.2);
   padding: 0.15em 0.45em;
   border-radius: 0.25rem;
-  color: #882453;
+  color: #050505;
+  font-weight: 600;
   white-space: pre-wrap;
   word-break: break-word;
 }
 
 .payload-richtext pre {
-  background-color: rgba(92, 0, 54, 0.05);
-  border: 1px solid rgba(92, 0, 54, 0.15);
-  border-radius: 0.5rem;
+  background-color: #FFF9EC;
+  border: 1.5px solid #000000;
+  box-shadow: 3px 3px 0px #000000;
+  border-radius: 0.25rem;
   padding: 1rem 1.25rem;
   overflow-x: auto;
   margin: 1.5rem 0;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.9em;
   line-height: 1.6;
-  color: #5C0036;
+  color: #050505;
 }
 
 .payload-richtext pre code {
@@ -190,10 +193,11 @@ h6 {
 .payload-richtext blockquote {
   font-family: var(--font-ogg), Georgia, serif;
   font-style: italic;
-  border-left: 2px solid #882453;
-  padding-left: 1.25rem;
+  border-left: 3px solid #EE3338;
+  background-color: rgba(255, 249, 236, 0.4);
+  padding: 0.75rem 1.25rem;
   margin: 2rem 0;
-  color: rgba(92, 0, 54, 0.85);
+  color: #050505;
 }
 
 /* Syntax Highlighting */
@@ -201,12 +205,12 @@ h6 {
 .token.prolog,
 .token.doctype,
 .token.cdata {
-  color: rgba(92, 0, 54, 0.5);
+  color: rgba(5, 5, 5, 0.55);
   font-style: italic;
 }
 
 .token.punctuation {
-  color: rgba(92, 0, 54, 0.7);
+  color: rgba(5, 5, 5, 0.75);
 }
 
 .token.property,
@@ -216,7 +220,7 @@ h6 {
 .token.constant,
 .token.symbol,
 .token.deleted {
-  color: #8E2B59;
+  color: #D92D20;
 }
 
 .token.selector,
@@ -225,7 +229,7 @@ h6 {
 .token.char,
 .token.builtin,
 .token.inserted {
-  color: #2D5A27;
+  color: #0D6832;
 }
 
 .token.operator,
@@ -233,30 +237,30 @@ h6 {
 .token.url,
 .language-css .token.string,
 .style .token.string {
-  color: #7A3B18;
+  color: #8C4000;
 }
 
 .token.atrule,
 .token.attr-value,
 .token.keyword {
-  color: #8E2B59;
-  font-weight: 500;
+  color: #0077C8;
+  font-weight: 600;
 }
 
 .token.function,
 .token.class-name {
-  color: #3B4D80;
+  color: #7B1FA2;
 }
 
 .token.regex,
 .token.important,
 .token.variable {
-  color: #8E2B59;
+  color: #EE3338;
 }
 
 .custom-scrollbar {
   scrollbar-width: thin;
-  scrollbar-color: rgba(92, 0, 54, 0.3) transparent;
+  scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
 }
 
 .custom-scrollbar::-webkit-scrollbar {
@@ -268,6 +272,6 @@ h6 {
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: rgba(92, 0, 54, 0.3);
+  background-color: rgba(0, 0, 0, 0.3);
   border-radius: 9999px;
 }

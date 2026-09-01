@@ -1,37 +1,24 @@
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import { getPosts } from "@/lib/posts";
 import { CatStamp } from "@/components/CatStamp";
-import { instrumentSerif } from "./fonts";
 
-export const revalidate = 60;
+export const revalidate = 60; // ISR cache revalidation every 60s
 
 export default async function Home() {
   const posts = await getPosts();
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://whoisben.net";
 
-  const jsonLd = {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.whoisben.net";
+
+  const personJsonLd = {
     "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebSite",
-        "@id": `${siteUrl}/#website`,
-        url: siteUrl,
-        name: "Bennet Leff",
-        description: "Personal website, engineering essays, and writings of Bennet Leff.",
-        publisher: {
-          "@id": `${siteUrl}/#person`,
-        },
-        inLanguage: "en-US",
-      },
-      {
-        "@type": "Person",
-        "@id": `${siteUrl}/#person`,
-        name: "Bennet Leff",
-        url: siteUrl,
-        jobTitle: "Senior Full Stack Engineer & Systems Builder",
-        sameAs: ["https://github.com/BennetLeff"],
-      },
+    "@type": "Person",
+    name: "Bennet Leff",
+    jobTitle: "Senior Full Stack Engineer",
+    url: siteUrl,
+    sameAs: [
+      "https://github.com/BennetLeff",
+      `${siteUrl}/resume.pdf`,
     ],
   };
 
@@ -39,40 +26,38 @@ export default async function Home() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
       />
-      <main
-        id="main-content"
-        className="min-h-screen w-full lg:h-screen lg:overflow-hidden flex flex-col justify-between"
-      >
-        {/* Outer Frame Container */}
-        <div className="flex-1 w-full max-w-[1680px] mx-auto grid grid-cols-1 lg:grid-cols-12 lg:h-full">
+      <main className="min-h-screen p-3 sm:p-6 lg:p-10 flex flex-col justify-center max-w-[1700px] mx-auto transition-colors duration-200">
+        <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[calc(100vh-3rem)] lg:min-h-[calc(100vh-5rem)] border border-black/15 rounded-xs overflow-hidden shadow-xs">
           
           {/* ========================================================================= */}
           {/* LEFT COLUMN: Identity & Bio (lg:col-span-4)                              */}
           {/* ========================================================================= */}
           <section
             aria-label="About Bennet Leff"
-            className="lg:col-span-4 p-6 sm:p-10 lg:p-12 lg:border-r border-[#5C0036]/15 flex flex-col justify-between overflow-y-auto custom-scrollbar"
+            className="lg:col-span-4 p-6 sm:p-10 lg:p-12 lg:border-r border-black/15 flex flex-col justify-between overflow-y-auto custom-scrollbar"
           >
             <div>
               {/* Main Heading */}
               <header className="mb-6">
-                <div className="text-xs sm:text-sm font-mono uppercase tracking-widest text-[#5C0036]/72 mb-2">
+                <div className="text-xs sm:text-sm font-mono uppercase tracking-widest text-black/70 mb-2">
                   [IDENTITY // 01]
                 </div>
-                <h1 className="text-4xl sm:text-5xl lg:text-[3.5rem] xl:text-[4rem] font-bold tracking-tight leading-[0.95] text-[#5C0036] whitespace-nowrap">
+                <h1 className="text-4xl sm:text-5xl lg:text-[3.5rem] xl:text-[4rem] font-bold tracking-tight leading-[0.95] text-black whitespace-nowrap">
                   bennet leff
                 </h1>
-                <div className="mt-3 text-xs sm:text-sm font-mono uppercase tracking-widest text-[#882453] font-medium">
-                  [Senior Full Stack Engineer]
+                <div className="mt-3">
+                  <span className="inline-block bg-[#3DB4F8] text-black px-2.5 py-0.5 text-xs sm:text-sm font-mono uppercase tracking-wider font-bold rounded-xs shadow-[2px_2px_0px_#000000]">
+                    [Senior Full Stack Engineer]
+                  </span>
                 </div>
               </header>
 
               {/* Bio & Intro tailored to Bennet's Resume */}
-              <div className="space-y-6 text-sm sm:text-base text-[#5C0036]/90 leading-relaxed font-sans">
+              <div className="space-y-6 text-sm sm:text-base text-black/90 leading-relaxed font-sans">
                 <div>
-                  <div className="text-xs font-mono uppercase tracking-wider text-[#5C0036]/72 mb-1.5 font-medium">
+                  <div className="text-xs font-mono uppercase tracking-wider text-black/70 mb-1.5 font-medium">
                     [HI]
                   </div>
                   <p>
@@ -81,47 +66,47 @@ export default async function Home() {
                 </div>
 
                 <div>
-                  <div className="text-xs font-mono uppercase tracking-wider text-[#5C0036]/72 mb-1.5 font-medium">
+                  <div className="text-xs font-mono uppercase tracking-wider text-black/70 mb-1.5 font-medium">
                     [BACKGROUND]
                   </div>
                   <p>
-                    Previously Senior Full Stack Engineer at <strong className="font-bold text-[#5C0036]">Honor</strong>, building web infra and tooling, LLM observability, and AI workflows. Prior at <strong className="font-bold text-[#5C0036]">Capital One</strong> building high-throughput financial systems, and hacking at startups on frontends and ML.
+                    Previously Senior Full Stack Engineer at <strong className="font-bold text-black">Honor</strong>, building web infra and tooling, LLM observability, and AI workflows. Prior at <strong className="font-bold text-black">Capital One</strong> building high-throughput financial systems, and hacking at startups on frontends and ML.
                   </p>
                 </div>
 
                 <div>
-                  <div className="text-xs font-mono uppercase tracking-wider text-[#5C0036]/72 mb-1.5 font-medium">
+                  <div className="text-xs font-mono uppercase tracking-wider text-black/70 mb-1.5 font-medium">
                     [CURRENT EXPERIMENTS]
                   </div>
                   <p>
-                    Tinkering on <strong className="font-bold text-[#5C0036]">Temper</strong> (an open-source induction cooker & hardware verification suite in the box), scalable Rust testing in V8 isolates, and compiler exploration.
+                    Tinkering on <strong className="font-bold text-black">Temper</strong> (an open-source induction cooker & hardware verification suite in the box), scalable Rust testing in V8 isolates, and compiler exploration.
                   </p>
                 </div>
               </div>
             </div>
 
             {/* Left Column Footer */}
-            <div className="mt-10 pt-6 border-t border-[#5C0036]/15 flex items-center justify-between text-xs sm:text-sm font-mono text-[#5C0036]/75">
+            <div className="mt-10 pt-6 border-t border-black/15 flex items-center justify-between text-xs sm:text-sm font-mono text-black/75">
               <div className="flex items-center gap-3 sm:gap-4">
                 <a
                   href="/resume.pdf?v=20260826-1423"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#5C0036] hover:text-[#882453] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#882453] rounded-xs"
+                  className="text-black hover:text-[#EE3338] font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black rounded-xs"
                 >
                   Resume ↗
                 </a>
-                <span aria-hidden="true" className="text-[#5C0036]/40">•</span>
+                <span aria-hidden="true" className="text-black/40">•</span>
                 <a
                   href="https://github.com/BennetLeff"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#5C0036] hover:text-[#882453] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#882453] rounded-xs"
+                  className="text-black hover:text-[#EE3338] font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black rounded-xs"
                 >
                   GitHub ↗
                 </a>
               </div>
-              <span className="text-[#5C0036]/70">© {new Date().getFullYear()}</span>
+              <span className="text-black/60">© {new Date().getFullYear()}</span>
             </div>
           </section>
 
@@ -130,19 +115,19 @@ export default async function Home() {
           {/* ========================================================================= */}
           <section
             aria-label="Featured Visual"
-            className="lg:col-span-4 p-6 sm:p-10 lg:p-10 lg:border-r border-[#5C0036]/15 flex flex-col justify-between items-center bg-[#5C0036]/[0.02] border-y lg:border-y-0"
+            className="lg:col-span-4 p-6 sm:p-10 lg:p-10 lg:border-r border-black/15 flex flex-col justify-between items-center bg-black/[0.02] border-y lg:border-y-0"
           >
             {/* Top Caption */}
-            <div className="w-full flex items-center justify-between text-xs font-mono uppercase tracking-widest text-[#5C0036]/72 pb-4">
+            <div className="w-full flex items-center justify-between text-xs font-mono uppercase tracking-widest text-black/70 pb-4">
               <span>[MEMENTO // 01]</span>
               <span>[STAMP // DALIA]</span>
             </div>
 
             {/* Photo Card Container with Angled Cat Stamp */}
             <div className="relative my-auto w-full max-w-[340px] group">
-              {/* Photo Frame */}
-              <div className="p-2 sm:p-2.5 bg-[#EAF2E7] border border-[#5C0036]/15 rounded-xs shadow-md transition-transform duration-500 ease-out group-hover:scale-[1.01]">
-                <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xs bg-[#5C0036]/10">
+              {/* Photo Frame with Brutalist Offset Shadow */}
+              <div className="p-2 sm:p-2.5 bg-[#FFF9EC] border-2 border-black rounded-xs shadow-[5px_5px_0px_#000000] transition-transform duration-500 ease-out group-hover:scale-[1.01]">
+                <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xs bg-black/10 border border-black/10">
                   <Image
                     src="/photo.jpg"
                     alt="Bennet Leff"
@@ -161,7 +146,7 @@ export default async function Home() {
             </div>
 
             {/* Bottom Caption */}
-            <div className="w-full flex items-center justify-between text-xs font-mono uppercase tracking-widest text-[#5C0036]/72 pt-4">
+            <div className="w-full flex items-center justify-between text-xs font-mono uppercase tracking-widest text-black/70 pt-4">
               <span>EST. 2026</span>
               <span>[STILL BUILDING]</span>
             </div>
@@ -176,8 +161,8 @@ export default async function Home() {
           >
             <div>
               {/* Writing Header */}
-              <div className="flex items-center justify-between pb-4 border-b border-[#5C0036]/15 text-xs sm:text-sm uppercase tracking-widest text-[#5C0036]/75 font-mono mb-6">
-                <h2 id="writing-section-heading" className="font-mono text-xs sm:text-sm uppercase tracking-widest text-[#5C0036]/75">
+              <div className="flex items-center justify-between pb-4 border-b border-black/15 text-xs sm:text-sm uppercase tracking-widest text-black/75 font-mono mb-6">
+                <h2 id="writing-section-heading" className="font-mono text-xs sm:text-sm uppercase tracking-widest text-black/75">
                   [WRITING & ESSAYS]
                 </h2>
                 <span>
@@ -186,16 +171,16 @@ export default async function Home() {
               </div>
 
               {/* Post List */}
-              <ul className="divide-y divide-[#5C0036]/15" role="list">
+              <ul className="divide-y divide-black/15" role="list">
                 {posts.map((post) => (
                   <li key={post.slug}>
                     <Link
                       href={`/posts/${post.slug}`}
-                      className="group block py-5 sm:py-6 transition-all hover:opacity-85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#882453] rounded-xs"
+                      className="group block py-5 sm:py-6 transition-all hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black rounded-xs"
                     >
-                      <div className="flex items-center gap-3 text-xs font-mono text-[#5C0036]/72 mb-1.5 uppercase tracking-wider">
+                      <div className="flex items-center gap-3 text-xs font-mono text-black/70 mb-2 uppercase tracking-wider">
                         {post.category && (
-                          <span className="text-[#882453] font-medium">
+                          <span className="bg-[#3DB4F8] text-black px-1.5 py-0.5 rounded-xs font-bold shadow-[1.5px_1.5px_0px_#000000]">
                             [{post.category}]
                           </span>
                         )}
@@ -209,12 +194,12 @@ export default async function Home() {
                         )}
                       </div>
 
-                      <h3 className="text-lg sm:text-xl font-bold text-[#5C0036] transition-colors group-hover:text-[#882453] leading-snug">
+                      <h3 className="text-lg sm:text-xl font-bold text-black transition-colors group-hover:text-[#EE3338] leading-snug">
                         {post.title}
                       </h3>
 
                       {post.excerpt && (
-                        <p className="mt-2 text-sm sm:text-base text-[#5C0036]/75 font-serif italic line-clamp-2 leading-relaxed">
+                        <p className="mt-2 text-sm sm:text-base text-black/80 font-serif italic line-clamp-2 leading-relaxed">
                           {post.excerpt}
                         </p>
                       )}
@@ -224,7 +209,7 @@ export default async function Home() {
               </ul>
             </div>
 
-            <div className="mt-10 pt-4 text-xs font-mono text-[#5C0036]/70 flex items-center justify-between border-t border-[#5C0036]/15">
+            <div className="mt-10 pt-4 text-xs font-mono text-black/60 flex items-center justify-between border-t border-black/15">
               <span>[ARCHIVE // {posts.length.toString().padStart(2, '0')} ESSAYS]</span>
               <span>[END OF FEED]</span>
             </div>

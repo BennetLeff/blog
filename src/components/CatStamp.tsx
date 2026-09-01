@@ -11,8 +11,8 @@ interface CatStampProps {
 export function CatStamp({ className = '', stickerClassName = '' }: CatStampProps) {
   return (
     <div className={`group relative flex items-center justify-center cursor-pointer select-none ${className || 'w-24 h-24 sm:w-32 sm:h-32'}`}>
-      {/* Circular Rotating Cursive Text Ring that animates in on hover */}
-      <div className="absolute inset-0 pointer-events-none transition-all duration-500 ease-out opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100 group-hover:animate-[spin_14s_linear_infinite] z-10">
+      {/* Circular Rotating Cursive Text Ring that spins on hover */}
+      <div className="absolute inset-0 pointer-events-none transition-all duration-500 ease-out opacity-90 group-hover:opacity-100 group-hover:animate-[spin_14s_linear_infinite] z-10">
         <svg
           viewBox="0 0 200 200"
           className="w-full h-full overflow-visible"
@@ -24,7 +24,7 @@ export function CatStamp({ className = '', stickerClassName = '' }: CatStampProp
             />
           </defs>
           <text
-            className="text-[13.5px] font-ogg italic fill-[#882453]"
+            className="text-[13.5px] font-ogg italic fill-[#EE3338]"
             style={{
               fontFamily: 'var(--font-ogg), "Snell Roundhand", "Brush Script MT", cursive, serif',
               fontStyle: 'italic',
