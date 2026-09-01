@@ -12,11 +12,21 @@ function resolveDatabaseUuid(id?: string): string {
 }
 
 export async function GET(req: NextRequest) {
-  const accountId = process.env.CLOUDFLARE_ACCOUNT_ID || '03f642afe070f05b727f7cd31f02ef48'
-  const databaseId = resolveDatabaseUuid(process.env.CLOUDFLARE_DATABASE_ID || process.env.CLOUDFLARE_D1_REMOTE)
-  const apiToken = process.env.CLOUDFLARE_API_TOKEN
-
   try {
+    const payload = await getPayload({ config })
+    const { user } = await payload.auth({ headers: req.headers })
+
+    if (!user) {
+      return NextResponse.json(
+        { ok: false, error: 'Unauthorized: Admin authentication required.' },
+        { status: 401 }
+      )
+    }
+
+    const accountId = process.env.CLOUDFLARE_ACCOUNT_ID || '03f642afe070f05b727f7cd31f02ef48'
+    const databaseId = resolveDatabaseUuid(process.env.CLOUDFLARE_DATABASE_ID || process.env.CLOUDFLARE_D1_REMOTE)
+    const apiToken = process.env.CLOUDFLARE_API_TOKEN
+
     if (apiToken) {
       const sqlQueries = [
         // 0: Total stats
@@ -74,7 +84,6 @@ export async function GET(req: NextRequest) {
     }
 
     // Fallback via Payload Local API
-    const payload = await getPayload({ config })
     const allViews = await payload.find({
       collection: 'page_views',
       limit: 1000,

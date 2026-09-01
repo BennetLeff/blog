@@ -1,6 +1,8 @@
 import Link from "next/link";
+import Image from "next/image";
 import { getPosts } from "@/lib/posts";
 import { CatStamp } from "@/components/CatStamp";
+import { instrumentSerif } from "./fonts";
 
 export const revalidate = 60;
 
@@ -27,10 +29,8 @@ export default async function Home() {
         "@id": `${siteUrl}/#person`,
         name: "Bennet Leff",
         url: siteUrl,
-        jobTitle: "Software Engineer & Builder",
-        sameAs: [
-          "https://github.com/BennetLeff",
-        ],
+        jobTitle: "Senior Full Stack Engineer & Systems Builder",
+        sameAs: ["https://github.com/BennetLeff"],
       },
     ],
   };
@@ -43,96 +43,194 @@ export default async function Home() {
       />
       <main
         id="main-content"
-        className="min-h-screen max-w-6xl mx-auto px-6 sm:px-12 py-16 sm:py-20 flex flex-col justify-start relative"
+        className="min-h-screen w-full lg:h-screen lg:overflow-hidden flex flex-col justify-between"
       >
-        {/* Interactive Cat Stamp with Circular Cursive Hover Animation */}
-        <div className="absolute top-3 sm:top-6 right-4 sm:right-10 z-20">
-          <CatStamp />
-        </div>
+        {/* Outer Frame Container */}
+        <div className="flex-1 w-full max-w-[1680px] mx-auto grid grid-cols-1 lg:grid-cols-12 lg:h-full">
+          
+          {/* ========================================================================= */}
+          {/* LEFT COLUMN: Identity & Bio (lg:col-span-4)                              */}
+          {/* ========================================================================= */}
+          <section
+            aria-label="About Bennet Leff"
+            className="lg:col-span-4 p-6 sm:p-10 lg:p-12 lg:border-r border-[#5C0036]/15 flex flex-col justify-between overflow-y-auto custom-scrollbar"
+          >
+            <div>
+              {/* Main Heading */}
+              <header className="mb-6">
+                <div className="text-xs sm:text-sm font-mono uppercase tracking-widest text-[#5C0036]/72 mb-2">
+                  [IDENTITY // 01]
+                </div>
+                <h1 className="text-4xl sm:text-5xl lg:text-[3.5rem] xl:text-[4rem] font-bold tracking-tight leading-[0.95] text-[#5C0036] whitespace-nowrap">
+                  bennet leff
+                </h1>
+                <div className="mt-3 text-xs sm:text-sm font-mono uppercase tracking-widest text-[#882453] font-medium">
+                  [Senior Full Stack Engineer]
+                </div>
+              </header>
 
-        <header className="mb-8 sm:mb-12">
-          <h1 className="text-7xl sm:text-8xl md:text-9xl lg:text-[11rem] font-normal tracking-tight leading-[0.9] text-[#d84715] font-heading">
-            Bennet Leff
-          </h1>
-        </header>
+              {/* Bio & Intro tailored to Bennet's Resume */}
+              <div className="space-y-6 text-sm sm:text-base text-[#5C0036]/90 leading-relaxed font-sans">
+                <div>
+                  <div className="text-xs font-mono uppercase tracking-wider text-[#5C0036]/72 mb-1.5 font-medium">
+                    [HI]
+                  </div>
+                  <p>
+                    High-performance web, Rust and Agent experiments, Dalia my cat
+                  </p>
+                </div>
 
-        <section aria-labelledby="writing-section-heading" className="w-full">
-          <div className="flex items-center justify-between pb-4 border-b border-[#d4cdc0] text-xs sm:text-sm uppercase tracking-widest text-[#524d44] font-mono">
-            <h2 id="writing-section-heading" className="font-mono text-xs sm:text-sm uppercase tracking-widest text-[#524d44]">
-              Writing
-            </h2>
-            <span>
-              {posts.length} {posts.length === 1 ? "Post" : "Posts"}
-            </span>
-          </div>
+                <div>
+                  <div className="text-xs font-mono uppercase tracking-wider text-[#5C0036]/72 mb-1.5 font-medium">
+                    [BACKGROUND]
+                  </div>
+                  <p>
+                    Previously Senior Full Stack Engineer at <strong className="font-bold text-[#5C0036]">Honor</strong>, building web infra and tooling, LLM observability, and AI workflows. Prior at <strong className="font-bold text-[#5C0036]">Capital One</strong> building high-throughput financial systems, and hacking at startups on frontends and ML.
+                  </p>
+                </div>
 
-          {/* Scrollable list container */}
-          <div className="max-h-none overflow-visible md:max-h-[580px] md:overflow-y-auto md:pr-6 md:scroll-smooth custom-scrollbar">
-            <ul className="divide-y divide-[#d4cdc0]" role="list">
-              {posts.map((post) => (
-                <li key={post.slug}>
-                  <Link
-                    href={`/posts/${post.slug}`}
-                    className="group flex flex-col sm:flex-row sm:items-baseline justify-between py-6 sm:py-8 transition-all hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d84715] focus-visible:ring-offset-2 rounded-sm"
-                  >
-                    <div className="flex-1 pr-6">
-                      <h3 className="text-xl sm:text-2xl md:text-[1.65rem] font-normal text-[#1c1a17] transition-transform group-hover:translate-x-1 duration-200 leading-snug">
+                <div>
+                  <div className="text-xs font-mono uppercase tracking-wider text-[#5C0036]/72 mb-1.5 font-medium">
+                    [CURRENT EXPERIMENTS]
+                  </div>
+                  <p>
+                    Tinkering on <strong className="font-bold text-[#5C0036]">Temper</strong> (an open-source induction cooker & hardware verification suite in the box), scalable Rust testing in V8 isolates, and compiler exploration.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Left Column Footer */}
+            <div className="mt-10 pt-6 border-t border-[#5C0036]/15 flex items-center justify-between text-xs sm:text-sm font-mono text-[#5C0036]/75">
+              <div className="flex items-center gap-3 sm:gap-4">
+                <a
+                  href="/resume.pdf?v=20260826-1423"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#5C0036] hover:text-[#882453] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#882453] rounded-xs"
+                >
+                  Resume ↗
+                </a>
+                <span aria-hidden="true" className="text-[#5C0036]/40">•</span>
+                <a
+                  href="https://github.com/BennetLeff"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#5C0036] hover:text-[#882453] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#882453] rounded-xs"
+                >
+                  GitHub ↗
+                </a>
+              </div>
+              <span className="text-[#5C0036]/70">© {new Date().getFullYear()}</span>
+            </div>
+          </section>
+
+          {/* ========================================================================= */}
+          {/* CENTER COLUMN: Centerpiece Photo Frame with Dalia Cat Stamp (lg:col-span-4) */}
+          {/* ========================================================================= */}
+          <section
+            aria-label="Featured Visual"
+            className="lg:col-span-4 p-6 sm:p-10 lg:p-10 lg:border-r border-[#5C0036]/15 flex flex-col justify-between items-center bg-[#5C0036]/[0.02] border-y lg:border-y-0"
+          >
+            {/* Top Caption */}
+            <div className="w-full flex items-center justify-between text-xs font-mono uppercase tracking-widest text-[#5C0036]/72 pb-4">
+              <span>[MEMENTO // 01]</span>
+              <span>[STAMP // DALIA]</span>
+            </div>
+
+            {/* Photo Card Container with Angled Cat Stamp */}
+            <div className="relative my-auto w-full max-w-[340px] group">
+              {/* Photo Frame */}
+              <div className="p-2 sm:p-2.5 bg-[#EAF2E7] border border-[#5C0036]/15 rounded-xs shadow-md transition-transform duration-500 ease-out group-hover:scale-[1.01]">
+                <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xs bg-[#5C0036]/10">
+                  <Image
+                    src="/photo.jpg"
+                    alt="Bennet Leff"
+                    fill
+                    sizes="(max-width: 1024px) 80vw, 30vw"
+                    priority
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                </div>
+              </div>
+
+              {/* Dalia Cat Stamp Pinning Top-Right of Photo */}
+              <div className="absolute -top-6 -right-6 sm:-top-8 sm:-right-8 z-20">
+                <CatStamp className="w-24 h-24 sm:w-32 sm:h-32" stickerClassName="w-16 h-16 sm:w-22 sm:h-22" />
+              </div>
+            </div>
+
+            {/* Bottom Caption */}
+            <div className="w-full flex items-center justify-between text-xs font-mono uppercase tracking-widest text-[#5C0036]/72 pt-4">
+              <span>EST. 2026</span>
+              <span>[STILL BUILDING]</span>
+            </div>
+          </section>
+
+          {/* ========================================================================= */}
+          {/* RIGHT COLUMN: Writing & Essays Feed (lg:col-span-4)                      */}
+          {/* ========================================================================= */}
+          <section
+            aria-labelledby="writing-section-heading"
+            className="lg:col-span-4 p-6 sm:p-10 lg:p-12 flex flex-col justify-between overflow-y-auto custom-scrollbar"
+          >
+            <div>
+              {/* Writing Header */}
+              <div className="flex items-center justify-between pb-4 border-b border-[#5C0036]/15 text-xs sm:text-sm uppercase tracking-widest text-[#5C0036]/75 font-mono mb-6">
+                <h2 id="writing-section-heading" className="font-mono text-xs sm:text-sm uppercase tracking-widest text-[#5C0036]/75">
+                  [WRITING & ESSAYS]
+                </h2>
+                <span>
+                  [{posts.length.toString().padStart(2, '0')} POSTS]
+                </span>
+              </div>
+
+              {/* Post List */}
+              <ul className="divide-y divide-[#5C0036]/15" role="list">
+                {posts.map((post) => (
+                  <li key={post.slug}>
+                    <Link
+                      href={`/posts/${post.slug}`}
+                      className="group block py-5 sm:py-6 transition-all hover:opacity-85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#882453] rounded-xs"
+                    >
+                      <div className="flex items-center gap-3 text-xs font-mono text-[#5C0036]/72 mb-1.5 uppercase tracking-wider">
+                        {post.category && (
+                          <span className="text-[#882453] font-medium">
+                            [{post.category}]
+                          </span>
+                        )}
+                        {post.publishedAt ? (
+                          <time dateTime={post.publishedAt}>{post.date}</time>
+                        ) : (
+                          <span>{post.date}</span>
+                        )}
+                        {post.readingTime && (
+                          <span>• {post.readingTime}</span>
+                        )}
+                      </div>
+
+                      <h3 className="text-lg sm:text-xl font-bold text-[#5C0036] transition-colors group-hover:text-[#882453] leading-snug">
                         {post.title}
                       </h3>
+
                       {post.excerpt && (
-                        <p className="mt-2 text-base sm:text-lg text-[#48433a] font-serif line-clamp-1">
+                        <p className="mt-2 text-sm sm:text-base text-[#5C0036]/75 font-serif italic line-clamp-2 leading-relaxed">
                           {post.excerpt}
                         </p>
                       )}
-                    </div>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-                    <div className="flex items-center gap-4 mt-3 sm:mt-0 text-xs sm:text-sm text-[#575249] font-mono shrink-0">
-                      {post.category && (
-                        <span className="text-[#635c50] uppercase tracking-wider">
-                          {post.category}
-                        </span>
-                      )}
-                      {post.readingTime && (
-                        <span className="hidden md:inline text-[#6e675b]">
-                          • {post.readingTime}
-                        </span>
-                      )}
-                      {post.publishedAt ? (
-                        <time dateTime={post.publishedAt}>{post.date}</time>
-                      ) : (
-                        <span>{post.date}</span>
-                      )}
-                    </div>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
+            <div className="mt-10 pt-4 text-xs font-mono text-[#5C0036]/70 flex items-center justify-between border-t border-[#5C0036]/15">
+              <span>[ARCHIVE // {posts.length.toString().padStart(2, '0')} ESSAYS]</span>
+              <span>[END OF FEED]</span>
+            </div>
+          </section>
 
-        {/* Minimal Footer with Resume and GitHub */}
-        <footer className="mt-16 pt-6 border-t border-[#d4cdc0] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-xs sm:text-sm font-mono text-[#575249]">
-          <div className="flex items-center gap-4">
-            <a
-              href="/resume.pdf?v=20260826-1423"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#1c1a17] hover:text-[#d84715] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d84715] rounded-sm"
-            >
-              Resume ↗
-            </a>
-            <span aria-hidden="true" className="text-[#8e877a]">•</span>
-            <a
-              href="https://github.com/BennetLeff"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-[#d84715] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d84715] rounded-sm"
-            >
-              GitHub ↗
-            </a>
-          </div>
-          <span className="text-[#8e877a]">© {new Date().getFullYear()} Bennet Leff</span>
-        </footer>
+        </div>
       </main>
     </>
   );

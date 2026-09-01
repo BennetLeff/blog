@@ -1,45 +1,56 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-post-grotesk), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-body: var(--font-post-grotesk), sans-serif;
+  --font-sans: var(--font-ronzino), var(--font-post-grotesk), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: var(--font-ronzino), sans-serif;
+  --font-ronzino: var(--font-ronzino), sans-serif;
   --font-post-grotesk: var(--font-post-grotesk), sans-serif;
   --font-subtitle: var(--font-ogg), Georgia, serif;
   --font-serif: var(--font-ogg), Georgia, serif;
   --font-ogg: var(--font-ogg), Georgia, serif;
-  --font-heading: var(--font-ot-sector-narrow), sans-serif;
+  --font-heading: var(--font-ronzino), var(--font-ot-sector-narrow), sans-serif;
   --font-sector-narrow: var(--font-ot-sector-narrow), sans-serif;
+  --font-instrument: var(--font-instrument-serif), Georgia, serif;
 }
 
 :root {
-  --background: rgb(236, 231, 218);
-  --foreground: #1c1a17;
-  --title-orange: #d84715;
-  --muted: #524d44;
-  --subtle: #6e675c;
-  --border: #d4cdc0;
+  --background: #EAF2E7;
+  --foreground: #5C0036;
+  --accent: #882453;
+  --title-orange: #882453;
+  --muted: rgba(92, 0, 54, 0.75);
+  --subtle: rgba(92, 0, 54, 0.70);
+  --border: rgba(92, 0, 54, 0.18);
 }
 
 body {
-  background-color: rgb(236, 231, 218);
-  color: #1c1a17;
-  font-family: var(--font-post-grotesk), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: #EAF2E7;
+  color: #5C0036;
+  font-family: var(--font-ronzino), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-/* Default headings use Post Grotesk */
+/* Default headings use Ronzino */
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-post-grotesk), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--font-ronzino), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #5C0036;
 }
 
 /* Special heading font ONLY for main site title */
-.font-heading,
+.font-heading {
+  font-family: var(--font-ronzino), sans-serif;
+}
+
 .font-sector-narrow {
   font-family: var(--font-ot-sector-narrow), sans-serif;
+}
+
+.font-instrument {
+  font-family: var(--font-instrument-serif), "Instrument Serif", Georgia, serif !important;
 }
 
 .font-subtitle,
@@ -50,10 +61,11 @@ h6 {
 
 /* RichText Typography */
 .payload-richtext {
-  font-family: var(--font-post-grotesk), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--font-ronzino), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   font-size: 1.1875rem;
   line-height: 1.75;
   letter-spacing: -0.01em;
+  color: #5C0036;
 }
 
 .payload-richtext h1 {
@@ -63,7 +75,7 @@ h6 {
   letter-spacing: -0.02em;
   margin-top: 2.25rem;
   margin-bottom: 1rem;
-  color: #1c1a17;
+  color: #5C0036;
 }
 
 .payload-richtext h2 {
@@ -73,7 +85,7 @@ h6 {
   letter-spacing: -0.02em;
   margin-top: 1.85rem;
   margin-bottom: 0.75rem;
-  color: #1c1a17;
+  color: #5C0036;
 }
 
 .payload-richtext h3 {
@@ -83,7 +95,7 @@ h6 {
   letter-spacing: -0.01em;
   margin-top: 1.5rem;
   margin-bottom: 0.5rem;
-  color: #1c1a17;
+  color: #5C0036;
 }
 
 .payload-richtext h4 {
@@ -92,19 +104,19 @@ h6 {
   font-weight: 600;
   margin-top: 1.75rem;
   margin-bottom: 0.5rem;
-  color: #1c1a17;
+  color: #5C0036;
 }
 
 .payload-richtext a {
-  color: #1c1a17;
+  color: #5C0036;
   text-decoration: underline;
   text-underline-offset: 3px;
-  text-decoration-color: #d84715;
+  text-decoration-color: #882453;
   transition: color 0.2s, text-decoration-color 0.2s;
 }
 
 .payload-richtext a:hover {
-  color: #d84715;
+  color: #882453;
 }
 
 .payload-richtext p {
@@ -134,7 +146,7 @@ h6 {
 }
 
 .payload-richtext li::marker {
-  color: #d84715;
+  color: #882453;
 }
 
 .payload-richtext li p {
@@ -144,18 +156,18 @@ h6 {
 .payload-richtext code:not(pre code) {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.88em;
-  background-color: #ded7c8;
-  border: 1px solid #d4cdc0;
+  background-color: rgba(92, 0, 54, 0.06);
+  border: 1px solid rgba(92, 0, 54, 0.15);
   padding: 0.15em 0.45em;
   border-radius: 0.25rem;
-  color: #8f2b05;
+  color: #882453;
   white-space: pre-wrap;
   word-break: break-word;
 }
 
 .payload-richtext pre {
-  background-color: #ded7c8;
-  border: 1px solid #d4cdc0;
+  background-color: rgba(92, 0, 54, 0.05);
+  border: 1px solid rgba(92, 0, 54, 0.15);
   border-radius: 0.5rem;
   padding: 1rem 1.25rem;
   overflow-x: auto;
@@ -163,7 +175,7 @@ h6 {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.9em;
   line-height: 1.6;
-  color: #1c1a17;
+  color: #5C0036;
 }
 
 .payload-richtext pre code {
@@ -178,23 +190,23 @@ h6 {
 .payload-richtext blockquote {
   font-family: var(--font-ogg), Georgia, serif;
   font-style: italic;
-  border-left: 2px solid #d84715;
+  border-left: 2px solid #882453;
   padding-left: 1.25rem;
   margin: 2rem 0;
-  color: #48433a;
+  color: rgba(92, 0, 54, 0.85);
 }
 
-/* Syntax Highlighting (Prism tokens on warm cream) */
+/* Syntax Highlighting */
 .token.comment,
 .token.prolog,
 .token.doctype,
 .token.cdata {
-  color: #787164;
+  color: rgba(92, 0, 54, 0.5);
   font-style: italic;
 }
 
 .token.punctuation {
-  color: #575249;
+  color: rgba(92, 0, 54, 0.7);
 }
 
 .token.property,
@@ -204,7 +216,7 @@ h6 {
 .token.constant,
 .token.symbol,
 .token.deleted {
-  color: #ad3d00;
+  color: #8E2B59;
 }
 
 .token.selector,
@@ -213,7 +225,7 @@ h6 {
 .token.char,
 .token.builtin,
 .token.inserted {
-  color: #276938;
+  color: #2D5A27;
 }
 
 .token.operator,
@@ -221,30 +233,30 @@ h6 {
 .token.url,
 .language-css .token.string,
 .style .token.string {
-  color: #824f00;
+  color: #7A3B18;
 }
 
 .token.atrule,
 .token.attr-value,
 .token.keyword {
-  color: #c93d0c;
+  color: #8E2B59;
   font-weight: 500;
 }
 
 .token.function,
 .token.class-name {
-  color: #1b5b99;
+  color: #3B4D80;
 }
 
 .token.regex,
 .token.important,
 .token.variable {
-  color: #843265;
+  color: #8E2B59;
 }
 
 .custom-scrollbar {
   scrollbar-width: thin;
-  scrollbar-color: rgba(90, 85, 75, 0.4) transparent;
+  scrollbar-color: rgba(92, 0, 54, 0.3) transparent;
 }
 
 .custom-scrollbar::-webkit-scrollbar {
@@ -256,6 +268,6 @@ h6 {
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: rgba(90, 85, 75, 0.4);
+  background-color: rgba(92, 0, 54, 0.3);
   border-radius: 9999px;
 }

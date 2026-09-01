@@ -149,39 +149,41 @@ export default async function PostPage({ params }: PageProps) {
         <nav aria-label="Breadcrumb" className="mb-12">
           <Link
             href="/"
-            className="inline-flex items-center text-sm font-mono text-[#575249] hover:text-[#d84715] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d84715] focus-visible:ring-offset-2 rounded-sm transition-colors"
+            className="inline-flex items-center text-sm font-mono text-[#5C0036]/75 hover:text-[#882453] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#882453] focus-visible:ring-offset-2 rounded-xs transition-colors"
           >
             ← Bennet Leff
           </Link>
         </nav>
 
         {/* Header */}
-        <header className="mb-12 border-b border-[#d4cdc0] pb-8">
-          <div className="flex items-center gap-3 text-xs uppercase tracking-widest font-mono text-[#575249] mb-4">
+        <header className="mb-12 border-b border-[#5C0036]/15 pb-8">
+          <div className="flex items-center gap-3 text-xs uppercase tracking-widest font-mono text-[#882453] font-medium mb-4">
             <span>{post.category}</span>
-            <span aria-hidden="true">•</span>
+            <span aria-hidden="true" className="text-[#5C0036]/40">•</span>
             {post.publishedAt ? (
-              <time dateTime={post.publishedAt}>{post.date}</time>
+              <time dateTime={post.publishedAt} className="text-[#5C0036]/72">{post.date}</time>
             ) : (
-              <span>{post.date}</span>
+              <span className="text-[#5C0036]/72">{post.date}</span>
             )}
-            <span aria-hidden="true">•</span>
-            <span>{post.readingTime}</span>
+            <span aria-hidden="true" className="text-[#5C0036]/40">•</span>
+            <span className="text-[#5C0036]/72">{post.readingTime}</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-normal tracking-tight text-[#1c1a17] leading-tight">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-[#5C0036] leading-tight">
             {post.title}
           </h1>
           {post.excerpt && (
-            <p className="mt-6 text-lg sm:text-xl text-[#48433a] italic leading-relaxed font-serif">
+            <p className="mt-6 text-lg sm:text-xl text-[#5C0036]/80 italic leading-relaxed font-serif">
               {post.excerpt}
             </p>
           )}
         </header>
 
         {/* Content */}
-        <div className="space-y-6 text-lg sm:text-xl leading-relaxed text-[#1c1a17] payload-richtext">
+        <div className="space-y-6 text-lg sm:text-xl leading-relaxed text-[#5C0036] payload-richtext font-sans">
           {isLexical ? (
             <RichText data={post.content} converters={customJSXConverters as any} />
+          ) : typeof post.content === "string" && post.content.includes("<") ? (
+            <div dangerouslySetInnerHTML={{ __html: post.content }} />
           ) : Array.isArray(post.content) ? (
             post.content.map((paragraph: string, idx: number) => (
               <p key={idx}>{paragraph}</p>
@@ -192,17 +194,17 @@ export default async function PostPage({ params }: PageProps) {
         </div>
 
         {/* Footer Navigation */}
-        <footer className="mt-20 pt-8 border-t border-[#d4cdc0] flex justify-between items-center text-sm font-mono text-[#575249]">
+        <footer className="mt-20 pt-8 border-t border-[#5C0036]/15 flex justify-between items-center text-sm font-mono text-[#5C0036]/75">
           <Link
             href="/"
-            className="hover:text-[#d84715] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d84715] focus-visible:ring-offset-2 rounded-sm transition-colors"
+            className="hover:text-[#882453] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#882453] focus-visible:ring-offset-2 rounded-xs transition-colors"
           >
             ← Back to writing
           </Link>
           {post.publishedAt ? (
-            <time dateTime={post.publishedAt}>{post.date}</time>
+            <time dateTime={post.publishedAt} className="text-[#5C0036]/70">{post.date}</time>
           ) : (
-            <span>{post.date}</span>
+            <span className="text-[#5C0036]/70">{post.date}</span>
           )}
         </footer>
       </article>

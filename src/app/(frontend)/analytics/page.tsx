@@ -57,6 +57,10 @@ export default function AnalyticsPage() {
     try {
       setLoading(true)
       const res = await fetch('/api/analytics/stats', { cache: 'no-store' })
+      if (res.status === 401) {
+        window.location.href = '/admin/login?redirect=/analytics'
+        return
+      }
       if (!res.ok) throw new Error(`HTTP ${res.status}`)
       const json = await res.json()
       if (json.ok) {

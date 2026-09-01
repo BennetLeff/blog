@@ -57,6 +57,23 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
+        source: '/(favicon.*|apple-touch-icon.*|web-app-manifest.*|site\\.webmanifest)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+          {
+            key: 'CDN-Cache-Control',
+            value: 'public, max-age=31536000',
+          },
+          {
+            key: 'Cloudflare-CDN-Cache-Control',
+            value: 'max-age=31536000',
+          },
+        ],
+      },
+      {
         source: '/resume.pdf',
         headers: [
           {
@@ -87,7 +104,7 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        source: '/((?!admin|api|resume\\.pdf).*)',
+        source: '/((?!admin|api|resume\\.pdf|favicon.*|apple-touch-icon.*|web-app-manifest.*|site\\.webmanifest).*)',
         headers: [
           {
             key: 'Cache-Control',

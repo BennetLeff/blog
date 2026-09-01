@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { postGrotesk, ogg, otSectorNarrow } from "./fonts";
+import { postGrotesk, ogg, otSectorNarrow, instrumentSerif, ronzino } from "./fonts";
 import { AnalyticsTracker } from "@/components/AnalyticsTracker";
 import "./globals.css";
 
@@ -15,6 +15,18 @@ export const metadata: Metadata = {
   authors: [{ name: "Bennet Leff", url: siteUrl }],
   creator: "Bennet Leff",
   publisher: "Bennet Leff",
+  icons: {
+    icon: [
+      { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
+  manifest: '/site.webmanifest',
   alternates: {
     canonical: "/",
   },
@@ -52,8 +64,15 @@ export default function FrontendLayout({
   return (
     <html
       lang="en"
-      className={`${postGrotesk.variable} ${ogg.variable} ${otSectorNarrow.variable} h-full antialiased`}
+      className={`${ronzino.variable} ${postGrotesk.variable} ${ogg.variable} ${otSectorNarrow.variable} ${instrumentSerif.variable} h-full antialiased`}
     >
+      <head>
+        <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+      </head>
       <body className="min-h-full flex flex-col font-sans">
         <AnalyticsTracker />
         <a

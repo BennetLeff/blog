@@ -1,4 +1,30 @@
 import localFont from "next/font/local";
+import { Instrument_Serif } from "next/font/google";
+
+export const ronzino = localFont({
+  src: [
+    {
+      path: "../../../public/fonts/Ronzino-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../../public/fonts/Ronzino-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-ronzino",
+  display: "swap",
+});
+
+export const instrumentSerif = Instrument_Serif({
+  weight: "400",
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  variable: "--font-instrument-serif",
+  display: "swap",
+});
 
 export const postGrotesk = localFont({
   src: [
