@@ -115,38 +115,40 @@ export default async function Home() {
           {/* ========================================================================= */}
           <section
             aria-label="Featured Visual"
-            className="lg:col-span-4 p-6 sm:p-10 lg:p-10 lg:border-r border-black/15 flex flex-col justify-between items-center bg-black/[0.02] border-y lg:border-y-0"
+            className="lg:col-span-4 p-6 sm:p-10 lg:p-12 lg:border-r border-black/15 flex flex-col justify-between items-center bg-black/[0.02] border-y lg:border-y-0"
           >
-            {/* Top Caption */}
-            <div className="w-full flex items-center justify-between text-xs font-mono uppercase tracking-widest text-black/70 pb-4">
-              <span>[MEMENTO // 01]</span>
-              <span>[STAMP // DALIA]</span>
-            </div>
-
-            {/* Photo Card Container with Angled Cat Stamp */}
-            <div className="relative my-auto w-full max-w-[340px] group">
-              {/* Photo Frame with Brutalist Offset Shadow */}
-              <div className="p-2 sm:p-2.5 bg-[#FFF9EC] border-2 border-black rounded-xs shadow-[5px_5px_0px_#000000] transition-transform duration-500 ease-out group-hover:scale-[1.01]">
-                <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xs bg-black/10 border border-black/10">
-                  <Image
-                    src="/photo.jpg"
-                    alt="Bennet Leff"
-                    fill
-                    sizes="(max-width: 1024px) 80vw, 30vw"
-                    priority
-                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                  />
-                </div>
+            <div className="w-full flex flex-col items-center">
+              {/* Top Caption */}
+              <div className="w-full flex items-center justify-between text-xs font-mono uppercase tracking-widest text-black/70 pb-4">
+                <span>[MEMENTO // 01]</span>
+                <span>[STAMP // DALIA]</span>
               </div>
 
-              {/* Dalia Cat Stamp Pinning Top-Right of Photo */}
-              <div className="absolute -top-6 -right-6 sm:-top-8 sm:-right-8 z-20">
-                <CatStamp className="w-24 h-24 sm:w-32 sm:h-32" stickerClassName="w-16 h-16 sm:w-22 sm:h-22" />
+              {/* Photo Card Container with Angled Cat Stamp */}
+              <div className="relative w-full max-w-[340px] group mt-4 sm:mt-6">
+                {/* Photo Frame with Brutalist Offset Shadow */}
+                <div className="p-2 sm:p-2.5 bg-[#FFF9EC] border-2 border-black rounded-xs shadow-[5px_5px_0px_#000000] transition-transform duration-500 ease-out group-hover:scale-[1.01]">
+                  <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xs bg-black/10 border border-black/10">
+                    <Image
+                      src="/photo.jpg"
+                      alt="Bennet Leff"
+                      fill
+                      sizes="(max-width: 1024px) 80vw, 30vw"
+                      priority
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    />
+                  </div>
+                </div>
+
+                {/* Dalia Cat Stamp Pinning Top-Right of Photo */}
+                <div className="absolute -top-6 -right-6 sm:-top-8 sm:-right-8 z-20">
+                  <CatStamp className="w-24 h-24 sm:w-32 sm:h-32" stickerClassName="w-16 h-16 sm:w-22 sm:h-22" />
+                </div>
               </div>
             </div>
 
             {/* Bottom Caption */}
-            <div className="w-full flex items-center justify-between text-xs font-mono uppercase tracking-widest text-black/70 pt-4">
+            <div className="w-full flex items-center justify-between text-xs font-mono uppercase tracking-widest text-black/70 pt-4 mt-8">
               <span>EST. 2026</span>
               <span>[STILL BUILDING]</span>
             </div>
