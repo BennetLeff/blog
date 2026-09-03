@@ -14,6 +14,565 @@ export interface Post {
 
 export const defaultRealPosts: Post[] = [
   {
+  "slug": "outbox-pattern",
+  "title": "The Outbox Pattern with pg_logical_emit_message and some questions answered",
+  "date": "Sep 2026",
+  "publishedAt": "2026-09-02T23:57:46.872Z",
+  "category": "System Design",
+  "readingTime": "10 min read",
+  "excerpt": "I keep bumping into this so I did a deep dive",
+  "content": {
+    "root": {
+      "children": [
+        {
+          "children": [
+            {
+              "detail": 0,
+              "format": 0,
+              "mode": "normal",
+              "style": "",
+              "text": "I keep bumping into the outbox pattern in system design interview prep. It addresses the \"dual write problem.\"  Imagine you run a lemonade stand. For each sale you jot down your sale in your ledger and you send a text to a business partner. Notice that you can be sure your ledger is updated (you're writing it in) but you can't know that your message gets to your partner without them acknowledging. In this particularly contrived example, you instead write a note to \"send a message\" to your partner in a second table of your ledger. In database terms, this works because we can wrap the two writes into a transaction, both succeed or both fail. Now that the \"send a message\" note is jotted down, some other worker, process, person, etc. can come pick up that note and send the message. Crisis averted! ",
+              "type": "text",
+              "version": 1
+            }
+          ],
+          "direction": null,
+          "format": "",
+          "indent": 0,
+          "type": "paragraph",
+          "version": 1,
+          "textFormat": 0,
+          "textStyle": ""
+        },
+        {
+          "children": [
+            {
+              "detail": 0,
+              "format": 0,
+              "mode": "normal",
+              "style": "",
+              "text": "Okay the example is contrived and mostly obscures why there's actually a crisis / problem. What's going on at a database level that makes this scheme sensible? We make a sale, our memory of the sale is in volatile memory so we want to commit it to a database. Suppose we do ",
+              "type": "text",
+              "version": 1
+            },
+            {
+              "detail": 0,
+              "format": 16,
+              "mode": "normal",
+              "style": "",
+              "text": "await",
+              "type": "text",
+              "version": 1
+            },
+            {
+              "detail": 0,
+              "format": 0,
+              "mode": "normal",
+              "style": "",
+              "text": " a ",
+              "type": "text",
+              "version": 1
+            },
+            {
+              "detail": 0,
+              "format": 16,
+              "mode": "normal",
+              "style": "",
+              "text": "Promise",
+              "type": "text",
+              "version": 1
+            },
+            {
+              "detail": 0,
+              "format": 0,
+              "mode": "normal",
+              "style": "",
+              "text": " in JavaScript to commit the sale to a durable store / DB and also ",
+              "type": "text",
+              "version": 1
+            },
+            {
+              "detail": 0,
+              "format": 16,
+              "mode": "normal",
+              "style": "",
+              "text": "await",
+              "type": "text",
+              "version": 1
+            },
+            {
+              "detail": 0,
+              "format": 0,
+              "mode": "normal",
+              "style": "",
+              "text": " a parallel ",
+              "type": "text",
+              "version": 1
+            },
+            {
+              "detail": 0,
+              "format": 16,
+              "mode": "normal",
+              "style": "",
+              "text": "Promise",
+              "type": "text",
+              "version": 1
+            },
+            {
+              "detail": 0,
+              "format": 0,
+              "mode": "normal",
+              "style": "",
+              "text": " to a messaging service (to alert our business partner). The first ",
+              "type": "text",
+              "version": 1
+            },
+            {
+              "detail": 0,
+              "format": 16,
+              "mode": "normal",
+              "style": "",
+              "text": "await",
+              "type": "text",
+              "version": 1
+            },
+            {
+              "detail": 0,
+              "format": 0,
+              "mode": "normal",
+              "style": "",
+              "text": " succeeds, the second ",
+              "type": "text",
+              "version": 1
+            },
+            {
+              "detail": 0,
+              "format": 16,
+              "mode": "normal",
+              "style": "",
+              "text": "await",
+              "type": "text",
+              "version": 1
+            },
+            {
+              "detail": 0,
+              "format": 0,
+              "mode": "normal",
+              "style": "",
+              "text": " fails. We can't easily roll this back as a transaction because the message sending process is outside of our transactional DB, so we've got ourselves into a pickle. Instead what we can do is do a single ",
+              "type": "text",
+              "version": 1
+            },
+            {
+              "detail": 0,
+              "format": 16,
+              "mode": "normal",
+              "style": "",
+              "text": "await",
+              "type": "text",
+              "version": 1
+            },
+            {
+              "detail": 0,
+              "format": 0,
+              "mode": "normal",
+              "style": "",
+              "text": " and two writes in a single transaction to Postgres, one write for the sale and one to an outbox table with a new record indicating to send a message. Either both writes succeed or both fail because they're in a transaction. ",
+              "type": "text",
+              "version": 1
+            }
+          ],
+          "direction": null,
+          "format": "",
+          "indent": 0,
+          "type": "paragraph",
+          "version": 1,
+          "textFormat": 0,
+          "textStyle": ""
+        },
+        {
+          "children": [
+            {
+              "detail": 0,
+              "format": 0,
+              "mode": "normal",
+              "style": "",
+              "text": "Now, CDC can come pick up our \"send a message\" record in the outbox table, send it off to Kafka. The messaging process joins a consumer group, picks up the message and does some message sending logic. Yes, our initial writer service can die. Yes, Postgres can die. Yes, Kafka can die. Even the messaging service can die. But each can durably store a message (our outbox table record) to be later picked up by retry logic. No single write is ever written while the second write is not. ",
+              "type": "text",
+              "version": 1
+            }
+          ],
+          "direction": null,
+          "format": "",
+          "indent": 0,
+          "type": "paragraph",
+          "version": 1,
+          "textFormat": 0,
+          "textStyle": ""
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "This excellent talk",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "link",
+              "version": 3,
+              "fields": {
+                "linkType": "custom",
+                "newTab": false,
+                "url": "https://www.youtube.com/watch?v=PkrzOR_tIQI"
+              },
+              "id": "6a98b66af246873eb8f71d62"
+            },
+            {
+              "detail": 0,
+              "format": 0,
+              "mode": "normal",
+              "style": "",
+              "text": " by Gunnar Morling explains this pattern and one more handy trick for doing this in production which I hadn't seen in any other discussion of the outbox pattern. Typically in the outbox table pattern you insert a row, process it, and eventually delete it. In Postgres, this actually unnecessarily consumes memory and strains resources. I had not considered what ",
+              "type": "text",
+              "version": 1
+            },
+            {
+              "detail": 0,
+              "format": 16,
+              "mode": "normal",
+              "style": "",
+              "text": "DELETE",
+              "type": "text",
+              "version": 1
+            },
+            {
+              "detail": 0,
+              "format": 0,
+              "mode": "normal",
+              "style": "",
+              "text": " was doing under the covers this deeply before this chat but it's worth going over. When you run ",
+              "type": "text",
+              "version": 1
+            },
+            {
+              "detail": 0,
+              "format": 16,
+              "mode": "normal",
+              "style": "",
+              "text": "DELETE",
+              "type": "text",
+              "version": 1
+            },
+            {
+              "detail": 0,
+              "format": 0,
+              "mode": "normal",
+              "style": "",
+              "text": " Postgres does not actually delete the record from its disk page. Instead, it marks the row with a tombstone. The tombstone remains in Postgres's Heap and in all associated table's indexes until it's garbage collected by ",
+              "type": "text",
+              "version": 1
+            },
+            {
+              "detail": 0,
+              "format": 16,
+              "mode": "normal",
+              "style": "",
+              "text": "VACUUM",
+              "type": "text",
+              "version": 1
+            },
+            {
+              "detail": 0,
+              "format": 0,
+              "mode": "normal",
+              "style": "",
+              "text": ". This can cause table and index bloat, excessive disk I/O ops, ",
+              "type": "text",
+              "version": 1
+            },
+            {
+              "children": [
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "and an ",
+                  "type": "text",
+                  "version": 1
+                },
+                {
+                  "detail": 0,
+                  "format": 16,
+                  "mode": "normal",
+                  "style": "",
+                  "text": "autovacuum",
+                  "type": "text",
+                  "version": 1
+                },
+                {
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": "",
+                  "text": " tax.",
+                  "type": "text",
+                  "version": 1
+                }
+              ],
+              "direction": null,
+              "format": "",
+              "indent": 0,
+              "type": "link",
+              "version": 3,
+              "fields": {
+                "linkType": "custom",
+                "newTab": false,
+                "url": "https://www.tigerdata.com/blog/the-autovacuum-tax"
+              },
+              "id": "6a98b8b1f246873eb8f71d66"
+            },
+            {
+              "detail": 0,
+              "format": 0,
+              "mode": "normal",
+              "style": "",
+              "text": " ",
+              "type": "text",
+              "version": 1
+            }
+          ],
+          "direction": null,
+          "format": "",
+          "indent": 0,
+          "type": "paragraph",
+          "version": 1,
+          "textFormat": 0,
+          "textStyle": ""
+        },
+        {
+          "children": [
+            {
+              "detail": 0,
+              "format": 0,
+              "mode": "normal",
+              "style": "",
+              "text": "It turns out, Postgres has a handy ",
+              "type": "text",
+              "version": 1
+            },
+            {
+              "detail": 0,
+              "format": 16,
+              "mode": "normal",
+              "style": "",
+              "text": "pg_logical_emit_message",
+              "type": "text",
+              "version": 1
+            },
+            {
+              "detail": 0,
+              "format": 0,
+              "mode": "normal",
+              "style": "",
+              "text": " function. When called, data is written directly to the WAL, avoiding indexes, and any need for ",
+              "type": "text",
+              "version": 1
+            },
+            {
+              "detail": 0,
+              "format": 16,
+              "mode": "normal",
+              "style": "",
+              "text": "VACUUM",
+              "type": "text",
+              "version": 1
+            },
+            {
+              "detail": 0,
+              "format": 0,
+              "mode": "normal",
+              "style": "",
+              "text": " down the road. CDC can read the WAL, pipe to Kafka, and we get at least once semantics (and we can do something fancier with Flink to get exactly once semantics). The call could look like: ",
+              "type": "text",
+              "version": 1
+            },
+            {
+              "detail": 0,
+              "format": 16,
+              "mode": "normal",
+              "style": "",
+              "text": "SELECT pg_logical_emit_message(true, 'outbox', '{\"event\": \"OrderCreated\"}')",
+              "type": "text",
+              "version": 1
+            },
+            {
+              "detail": 0,
+              "format": 0,
+              "mode": "normal",
+              "style": "",
+              "text": ". ",
+              "type": "text",
+              "version": 1
+            }
+          ],
+          "direction": null,
+          "format": "",
+          "indent": 0,
+          "type": "paragraph",
+          "version": 1,
+          "textFormat": 0,
+          "textStyle": ""
+        },
+        {
+          "children": [
+            {
+              "detail": 0,
+              "format": 0,
+              "mode": "normal",
+              "style": "",
+              "text": "Why do this at all if each write to Postgres is appended to the WAL? Why add some extra metadata with ",
+              "type": "text",
+              "version": 1
+            },
+            {
+              "detail": 0,
+              "format": 16,
+              "mode": "normal",
+              "style": "",
+              "text": "pg_logical_emit_message",
+              "type": "text",
+              "version": 1
+            },
+            {
+              "detail": 0,
+              "format": 0,
+              "mode": "normal",
+              "style": "",
+              "text": "? A couple different reasons! First, placing an order might touch 3 tables, not just 1 which would emit several logs into the WAL. Without some special event message emitted, we'd have to piece these three events together later down the line in a Kafka consumer. Second, consider that multiple consumers may listen to this CDC event. All consumers will be consuming some event(s) that is tied to the table name which is written into the WAL. This is a tightly coupled API! Finally, the event name that's blindly written into the WAL has no information about the semantics of the event. Was it ",
+              "type": "text",
+              "version": 1
+            },
+            {
+              "detail": 0,
+              "format": 16,
+              "mode": "normal",
+              "style": "",
+              "text": "OrderCancelledByUser",
+              "type": "text",
+              "version": 1
+            },
+            {
+              "detail": 0,
+              "format": 0,
+              "mode": "normal",
+              "style": "",
+              "text": "? Was it ",
+              "type": "text",
+              "version": 1
+            },
+            {
+              "detail": 0,
+              "format": 16,
+              "mode": "normal",
+              "style": "",
+              "text": "OrderCancelledDueToPaymentFailure",
+              "type": "text",
+              "version": 1
+            },
+            {
+              "detail": 0,
+              "format": 0,
+              "mode": "normal",
+              "style": "",
+              "text": "? Was it ",
+              "type": "text",
+              "version": 1
+            },
+            {
+              "detail": 0,
+              "format": 16,
+              "mode": "normal",
+              "style": "",
+              "text": "OrderCancelledByFraudDetection",
+              "type": "text",
+              "version": 1
+            },
+            {
+              "detail": 0,
+              "format": 0,
+              "mode": "normal",
+              "style": "",
+              "text": "? For these reasons, it's much better to write a specific event directly into the WAL with ",
+              "type": "text",
+              "version": 1
+            },
+            {
+              "detail": 0,
+              "format": 16,
+              "mode": "normal",
+              "style": "",
+              "text": "pg_logical_emit_message",
+              "type": "text",
+              "version": 1
+            },
+            {
+              "detail": 0,
+              "format": 0,
+              "mode": "normal",
+              "style": "",
+              "text": ". ",
+              "type": "text",
+              "version": 1
+            }
+          ],
+          "direction": null,
+          "format": "",
+          "indent": 0,
+          "type": "paragraph",
+          "version": 1,
+          "textFormat": 0,
+          "textStyle": ""
+        },
+        {
+          "children": [
+            {
+              "detail": 0,
+              "format": 0,
+              "mode": "normal",
+              "style": "",
+              "text": "Putting all of this together, we solved the dual write problem with little overhead.",
+              "type": "text",
+              "version": 1
+            }
+          ],
+          "direction": null,
+          "format": "",
+          "indent": 0,
+          "type": "paragraph",
+          "version": 1,
+          "textFormat": 0,
+          "textStyle": ""
+        }
+      ],
+      "direction": null,
+      "format": "",
+      "indent": 0,
+      "type": "root",
+      "version": 1
+    }
+  }
+},
+  {
     "slug": "rust-testing-v8",
     "title": "Solving one agent coding problem with highly scalable Rust testing in v8 isolates",
     "date": "Aug 2026",
@@ -105,6 +664,7 @@ async function fetchFromD1Http(slug?: string): Promise<Post[]> {
         Authorization: `Bearer ${apiToken}`,
         'Content-Type': 'application/json',
       },
+      body: JSON.stringify({ sql: sqlQuery }),
       next: { revalidate: 60 },
     })
 

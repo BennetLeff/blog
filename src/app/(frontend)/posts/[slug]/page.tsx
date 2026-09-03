@@ -14,6 +14,9 @@ interface PageProps {
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.whoisben.net";
 
+export const revalidate = 60;
+export const dynamicParams = true;
+
 export async function generateStaticParams() {
   const posts = await getPosts();
   return posts.map((post) => ({
