@@ -166,9 +166,9 @@ h6 {
 .payload-richtext code:not(pre code) {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.88em;
-  background-color: #FFF9EC;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  padding: 0.15em 0.45em;
+  background-color: rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  padding: 0.12em 0.4em;
   border-radius: 0.25rem;
   color: #050505;
   font-weight: 600;
